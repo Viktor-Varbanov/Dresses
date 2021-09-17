@@ -1,17 +1,16 @@
 ﻿namespace Dresses.Pages
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Text;
+    using System.Threading.Tasks;
     using OpenQA.Selenium;
     using OpenQA.Selenium.Support.UI;
 
-    public abstract class BasePage
+    public class BasePage
     {
         protected readonly IWebDriver driver;
         protected readonly WebDriverWait wait;
-
-        protected BasePage()
-        {
-            driver = Driver.Browser;
-            wait = Driver.BrowserWait;
-        }
     }
 }

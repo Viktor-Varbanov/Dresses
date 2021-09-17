@@ -11,7 +11,7 @@
 
         public void AssertCorrectProductIsSelected()
         {
-            AssertProductName(_product.Name);
+            AssertProductName(_product.Name, _productName);
             AssertProductDescription(_product.Description);
             AssertBaseImageUrl(_product.BaseImageUrl);
             AssertCorrectColorIsSelected(_product.Color);
@@ -22,10 +22,10 @@
             }
             AssertProductPrice(_product.Price);
             AssertProductSize(_product.Size);
-            
+
         }
 
-        private void AssertProductName(string expectedProductName)
+        private void AssertProductName(string expectedProductName, IWebElement productNameLocator)
         {
             var actualProductName = _productName.Text;
             Assert.AreEqual(expectedProductName, actualProductName, FailTestMessage.ActualDifferentFromExpected(expectedProductName, actualProductName));

@@ -1,51 +1,50 @@
 ﻿namespace Dresses.Pages.Main
 {
+    using static Driver;
+    using AbstractionPageComponents;
+    using Models;
     using OpenQA.Selenium;
     using OpenQA.Selenium.Interactions;
-    using OpenQA.Selenium.Support.UI;
     using SeleniumExtras.WaitHelpers;
-    using System;
 
-    public partial class MainPage : BasePage
+    public class MainPage : AbstractPage<MainPageElementMap>
     {
+        private readonly Product _product;
 
+        public MainPage(Product product)
+        {
+            _product = product;
+        }
 
         public void NavigateToPage()
         {
-            driver.Navigate().GoToUrl("http://automationpractice.com/index.php");
+            Browser.Navigate().GoToUrl("http://automationpractice.com/index.php");
         }
 
-        public void NavigateToDress(string name)
+        public void ScrollDownToDress()
         {
-            var dressElement = driver.FindElement(By.XPath(string.Format(ProductXpath, name)));
-            ((IJavaScriptExecutor)driver)
-                .ExecuteScript("arguments[0].scrollIntoView(true);", dressElement);
-
+            ((IJavaScriptExecutor)Browser)
+                .ExecuteScript("arguments[0].scrollIntoView(true);", Map().GetDress(_product.Name, _product.BaseImageUrl));
         }
 
-        public void HoverElement(string name)
+        public void HoverDress()
         {
-            Actions actions = new Actions(driver);
-            IWebElement dress = driver.FindElement(By.XPath(string.Format(ProductXpath, name)));
-            actions.MoveToElement(dress).Perform();
-
+            var actions = new Actions(Browser);
+            actions.MoveToElement(Map().GetDress(_product.Name, _product.BaseImageUrl)).Perform();
         }
 
-        public void ClickQuickView(string name)
+        public void ClickQuickViewButton()
         {
-            var dress = driver.FindElement(By.XPath(string.Format(ProductQuickView, name)));
-            wait.Until(ExpectedConditions.ElementIsVisible(By.XPath(string.Format(ProductQuickView, name))));
+            var dress = Driver.Browser.FindElement(By.XPath(Map().GetDressQuickView(_product.Name, _product.BaseImageUrl)));
+            BrowserWait.Until(ExpectedConditions.ElementIsVisible(By.XPath(Map().GetDressQuickView(_product.Name, _product.BaseImageUrl))));
             dress.Click();
             SwitchToIframe();
         }
 
         private void SwitchToIframe()
         {
-            wait.Until(ExpectedConditions.ElementIsVisible(By.XPath("//iframe[@class='fancybox-iframe']")));
-            driver.SwitchTo().Frame(QuickViewIframeWindow);
+            BrowserWait.Until(ExpectedConditions.ElementIsVisible(By.XPath("//iframe[@class='fancybox-iframe']")));
+            Browser.SwitchTo().Frame(Map().QuickViewIframeWindow);
         }
-
-
-
     }
 }

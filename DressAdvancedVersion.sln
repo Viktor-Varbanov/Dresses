@@ -9,7 +9,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dresses.Tests", "Dresses.Te
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dresses.Common", "Dresses.Common\Dresses.Common.csproj", "{E8A9F01E-24B7-4D7F-8B2B-7730934546D5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dresses.Models", "Dresses.Models\Dresses.Models.csproj", "{D5482218-2227-4D8D-811E-F325D0D32984}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dresses.Models", "Dresses.Models\Dresses.Models.csproj", "{D5482218-2227-4D8D-811E-F325D0D32984}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -5,35 +5,35 @@
 
     public class MainPageNavigatingProductFacade
     {
-        private readonly Product _product;
-        private MainPage _mainPage;
+        //private readonly Product _product;
+        //private MainPageSecond _mainPage;
 
-        public MainPageNavigatingProductFacade(Product product)
-        {
-            _product = product;
-        }
+        //public MainPageNavigatingProductFacade(Product product)
+        //{
+        //    _product = product;
+        //}
 
-        public MainPage MainPage
-        {
-            get
-            {
-                if (_mainPage == null)
-                {
-                    return new MainPage();
-                }
+        //public MainPageSecond MainPage
+        //{
+        //    get
+        //    {
+        //        if (_mainPage == null)
+        //        {
+        //            return new MainPageSecond();
+        //        }
 
-                return _mainPage;
-            }
-        }
+        //        return _mainPage;
+        //    }
+        //}
 
-        public void NavigateToProductQuickView()
-        {
-            MainPage.NavigateToPage();
-            MainPage.NavigateToDress(_product.Name);
-            MainPage.HoverElement(_product.Name);
-            MainPage.ClickQuickView(_product.Name);
+        //public void NavigateToProductQuickView()
+        //{
+        //    MainPage.NavigateToPage();
+        //    MainPage.ScrollDownToDress(_product.Name);
+        //    MainPage.HoverDress(_product.Name);
+        //    MainPage.ClickQuickViewButton(_product.Name);
 
-        }
+        //}
 
     }
 }

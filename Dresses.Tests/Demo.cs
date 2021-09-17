@@ -6,6 +6,7 @@
     using OpenQA.Selenium;
     using Models;
     using OpenQA.Selenium.Chrome;
+
     using Pages.Facade;
     using Pages.QuickView;
 
@@ -27,29 +28,40 @@
         [Test]
         public void ClickProductQuickViewAndVerifyTheInformationAboutProduct()
         {
-            var product = _database.GetProductByName("Printed Chiffon Dress");
-            var navigatingProductFacade = new MainPageNavigatingProductFacade(product);
-            navigatingProductFacade.NavigateToProductQuickView();
-            var quickViewVerificationFacade = new QuickViewVerificationFacade(product);
-            quickViewVerificationFacade.VerifyCorrectItemIsSelected();
+            //var product = _database.GetProductByName("Printed Chiffon Dress");
+            //var navigatingProductFacade = new MainPageNavigatingProductFacade(product);
+            //navigatingProductFacade.NavigateToProductQuickView();
+            //var quickViewVerificationFacade = new QuickViewVerificationFacade(product);
+            //quickViewVerificationFacade.VerifyCorrectItemIsSelected();
         }
         [Test]
         public void ClickProductQuickViewVerifyTheInformationAndAddToCart()
         {
-            var product = _database.GetProductByName("Printed Chiffon Dress");
-            product.BaseImageUrl = "http://automationpractice.com/img/p/2/2/22";
-            product.Color = "Green";
-            product.Size = "L";
-            product.Quantity = 2;
+            //var product = _database.GetProductByName("Printed Chiffon Dress");
+            //product.BaseImageUrl = "http://automationpractice.com/img/p/2/2/22";
+            //product.Color = "Green";
+            //product.Size = "L";
+            //product.Quantity = 2;
 
-            var navigatingProductFacade = new MainPageNavigatingProductFacade(product);
-            navigatingProductFacade.NavigateToProductQuickView();
+            //var navigatingProductFacade = new MainPageNavigatingProductFacade(product);
+            //navigatingProductFacade.NavigateToProductQuickView();
 
-            var quickViewVerificationFacade = new QuickViewVerificationFacade(product);
-            quickViewVerificationFacade.ChangeProductInformation();
-            quickViewVerificationFacade.VerifyCorrectItemIsSelected();
+            //var quickViewVerificationFacade = new QuickViewVerificationFacade(product);
+            //quickViewVerificationFacade.ChangeProductInformation();
+            //quickViewVerificationFacade.VerifyCorrectItemIsSelected();
         }
 
+
+        [Test]
+        public void testNewClassImplementation()
+        {
+            var product = _database.GetProductByName("Printed Chiffon Dress");
+            var mainPage = new MainPage(product);
+            mainPage.NavigateToPage();
+            mainPage.ScrollDownToDress();
+            mainPage.HoverDress();
+            mainPage.ClickQuickViewButton();
+        }
 
 
         [TearDown]
