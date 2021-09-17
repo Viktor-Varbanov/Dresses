@@ -5,7 +5,7 @@
 
     public class QuickViewVerificationFacade
     {
-        private readonly QuickViewPage _quickViewPage;
+        private readonly QuickViewPageM _quickViewPage;
         private readonly Product _product;
 
         public QuickViewVerificationFacade(Product product)
@@ -13,13 +13,13 @@
             _product = product;
         }
 
-        public QuickViewPage QuickViewPage
+        public QuickViewPageM QuickViewPage
         {
             get
             {
                 if (_quickViewPage == null)
                 {
-                    return new QuickViewPage(_product);
+                    return new QuickViewPageM(_product);
                 }
 
                 return _quickViewPage;

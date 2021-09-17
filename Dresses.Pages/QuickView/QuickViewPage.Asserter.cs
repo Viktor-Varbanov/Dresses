@@ -6,7 +6,7 @@
     using NUnit.Framework;
     using OpenQA.Selenium;
 
-    public partial class QuickViewPage
+    public partial class QuickViewPageM
     {
 
         public void AssertCorrectProductIsSelected()
