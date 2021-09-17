@@ -29,7 +29,9 @@ namespace Dresses.Models
                 Name = "Printed Chiffon Dress",
                 Description = "Printed chiffon knee length dress with tank straps. Deep v-neckline.",
                 BaseImageUrl = "http://automationpractice.com/img/p/2/0/20",
-                Price = 20.50m
+                Price = 20.50m,
+                Color = "Yellow",
+                Size = "S"
             });
             products.Add(new Product()
             {

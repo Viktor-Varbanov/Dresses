@@ -13,6 +13,8 @@
         {
             AssertProductName(_product.Name);
             AssertProductDescription(_product.Description);
+            AssertBaseImageUrl(_product.BaseImageUrl);
+            AssertCorrectColorIsSelected(_product.Color);
             var hasDiscount = CheckForDiscount();
             if (hasDiscount)
             {
@@ -20,6 +22,7 @@
             }
             AssertProductPrice(_product.Price);
             AssertProductSize(_product.Size);
+            
         }
 
         private void AssertProductName(string expectedProductName)
@@ -36,7 +39,7 @@
 
         private void AssertBaseImageUrl(string expectedBaseProductImageUrl)
         {
-            var productUrl = AttributesManipulation.GetValueByAttribute(_productImage, "src");
+            var productUrl = _productImage.GetAttribute("src");
             var baseProductImageUrl = DataManipulation.ExtractBaseUrl(productUrl);
             Assert.AreEqual(expectedBaseProductImageUrl, baseProductImageUrl, FailTestMessage.ActualDifferentFromExpected(expectedBaseProductImageUrl, baseProductImageUrl));
         }
@@ -50,7 +53,7 @@
 
         private void AssertProductSize(string expectedProductSize)
         {
-            var actualProductSize = _productSize.Text;
+            var actualProductSize = _productSizeValue.Text;
             Assert.AreEqual(expectedProductSize, actualProductSize, FailTestMessage.ActualDifferentFromExpected(expectedProductSize, actualProductSize));
         }
 
@@ -63,6 +66,7 @@
 
             Assert.AreEqual(expectedProductColor, selectedColor, FailTestMessage.ActualDifferentFromExpected(expectedProductColor, selectedColor));
         }
+
 
     }
 }

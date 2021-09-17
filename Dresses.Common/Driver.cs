@@ -50,6 +50,7 @@ public static class Driver
             case BrowserTypes.Chrome:
                 ChromeOptions chromeOptions = new ChromeOptions();
                 chromeOptions.AddArgument("start-maximized");
+
                 Driver.Browser = new ChromeDriver(chromeOptions);
                 break;
             default:

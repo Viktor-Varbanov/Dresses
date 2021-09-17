@@ -14,9 +14,13 @@
         private IWebElement _productPrice => driver.FindElement(By.Id("our_price_display"));
         private const string ProductPrice = "//span[@id='our_price_display']";
 
-        private IWebElement _productSize => driver.FindElement(By.XPath("//div[@id='uniform-group_1']//span"));
+        private IWebElement _productSizeValue => driver.FindElement(By.XPath("//div[@id='uniform-group_1']//span"));
+
+        private IWebElement _productSizeDropdown => driver.FindElement(By.XPath("//select[@id='group_1']"));
 
         private IWebElement _productDiscount => driver.FindElement(By.Id("reduction_percent_display"));
+
+        private IWebElement _productQuantity => driver.FindElement(By.XPath("//input[@id='quantity_wanted']"));
 
         //dynamically adding color
         private const string ColorPickerXpath = "//ul[@id='color_to_pick_list']//li//a[@name='{0}']";

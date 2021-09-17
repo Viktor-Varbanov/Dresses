@@ -4,6 +4,8 @@
     using Common;
     using Models;
     using OpenQA.Selenium;
+    using OpenQA.Selenium.Support.UI;
+
     public partial class QuickViewPage : BasePage
     {
         private readonly Product _product;
@@ -25,18 +27,19 @@
             var element = driver.FindElement(By.XPath(string.Format(ColorPickerXpath, name)));
             element.Click();
 
-            AssertCorrectColorIsSelected(_product.Color);
 
         }
 
         public void ChangeSize(string size)
         {
-
+            var dropdown = new SelectElement(_productSizeDropdown);
+            dropdown.SelectByText(size);
         }
 
         public void ChangeQuantity(string quantity)
         {
-
+            _productQuantity.Clear();
+            _productQuantity.SendKeys(quantity);
         }
 
         private bool CheckForDiscount()

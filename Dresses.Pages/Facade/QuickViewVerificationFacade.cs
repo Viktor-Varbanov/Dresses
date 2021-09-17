@@ -30,5 +30,12 @@
         {
             QuickViewPage.AssertCorrectProductIsSelected();
         }
+
+        public void ChangeProductInformation()
+        {
+            QuickViewPage.ChangeColor(_product.Color);
+            QuickViewPage.ChangeSize(_product.Size);
+            QuickViewPage.ChangeQuantity(_product.Quantity.ToString());
+        }
     }
 }

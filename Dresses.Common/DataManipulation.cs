@@ -1,5 +1,6 @@
 ﻿namespace Dresses.Common
 {
+    using System;
 
     public static class DataManipulation
     {
@@ -13,7 +14,19 @@
         }
 
         public static string ExtractBaseUrl(string url)
-            => url.Substring(0, 39);
+        {
+            if (url.Length == DataConstants.LongUrl)
+            {
+                return url.Substring(0, 42);
+            }
+            if (url.Length == DataConstants.ShortUrl)
+            {
+
+                return url.Substring(0, 39);
+            }
+
+            throw new ArgumentException("Provided url is invalid");
+        }
 
     }
 }
