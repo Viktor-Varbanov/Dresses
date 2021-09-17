@@ -4,7 +4,7 @@
     public abstract class AbstractPage<TMap>
         where TMap : AbstractElementMap, new()
     {
-        protected TMap Map() => new TMap();
+        public TMap Map() => new TMap();
     }
     public abstract class AbstractPageWithValidator<TMap, TValidator> : AbstractPage<TMap>
     where TMap : AbstractElementMap, new()

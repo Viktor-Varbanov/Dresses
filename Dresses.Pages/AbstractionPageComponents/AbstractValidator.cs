@@ -3,6 +3,6 @@
     public abstract class AbstractValidator<TMap>
     where TMap : AbstractElementMap, new()
     {
-        protected TMap Map => new TMap();
+        public TMap Map => new TMap();
     }
 }

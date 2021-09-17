@@ -27,12 +27,9 @@
         public IWebElement ProductQuantity => driver.FindElement(By.XPath("//input[@id='quantity_wanted']"));
 
         //dynamically adding color
-        private const string ColorPickerXpath = "//ul[@id='color_to_pick_list']//li//a[@name='{0}']";
+        public IWebElement ColorPickerXpath(string name) => driver.FindElement(By.XPath($"//ul[@id='color_to_pick_list']//li//a[@name='{name}']"));
 
-
-
-        private const string SelectedColor = "li.selected > a";
-
+        public IWebElement PickedColor => driver.FindElement(By.CssSelector("li.selected > a"));
 
     }
 }
