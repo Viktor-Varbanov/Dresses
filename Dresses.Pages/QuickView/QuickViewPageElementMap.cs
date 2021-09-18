@@ -5,7 +5,7 @@
 
     public class QuickViewPageElementMap : AbstractElementMap
     {
-        public IWebElement AddToCartButton => driver.FindElement(By.Id(""));
+        public IWebElement AddToCartButton => driver.FindElement(By.XPath("//p[@id='add_to_cart']//button"));
 
         public IWebElement ProductImage => driver.FindElement(By.Id("bigpic"));
 
@@ -14,7 +14,7 @@
                 By.XPath("//body[@id='product']//child::div[@class='pb-center-column col-xs-12 col-sm-4']//h1"));
 
         public IWebElement ProductDescription => driver.FindElement(By.XPath("//div[@id='short_description_block']//child::p"));
-        //private const string ProductDescription = "//div[@id='short_description_block']//child::p";
+        //private const string VerifyProductDescription = "//div[@id='short_description_block']//child::p";
 
         public IWebElement ProductPrice => driver.FindElement(By.Id("our_price_display"));
 
@@ -30,6 +30,8 @@
         public IWebElement ColorPickerXpath(string name) => driver.FindElement(By.XPath($"//ul[@id='color_to_pick_list']//li//a[@name='{name}']"));
 
         public IWebElement PickedColor => driver.FindElement(By.CssSelector("li.selected > a"));
+
+
 
     }
 }

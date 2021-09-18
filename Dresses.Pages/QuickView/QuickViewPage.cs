@@ -2,13 +2,10 @@
 {
     using System.Threading;
     using AbstractionPageComponents;
-    using Models;
     using OpenQA.Selenium.Support.UI;
 
     public class QuickViewPage : AbstractPageWithValidator<QuickViewPageElementMap, QuickViewValidator>
     {
-       
-
 
         public void AddToCart()
         {
@@ -34,7 +31,5 @@
             Map.ProductQuantity.SendKeys(quantity);
         }
 
-        private bool CheckForDiscount()
-            => Map.ProductDiscount.Displayed;
     }
 }

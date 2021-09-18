@@ -1,31 +1,30 @@
 ﻿namespace Dresses.Common
 {
-    using System;
+
+    using System.Text.RegularExpressions;
 
     public static class DataManipulation
     {
-        private static string FormatPrice(string value)
-            => value.Remove(0, 1);
+        private const string DiscountRegexPattern = "[0-9]{1,2}(.[0-9]{1,2})?";
+
+        private const string BaseImageUrlRegexPattern = "[^-]*";
+
+        private static string GetPriceMatchedByRegex(string value)
+        {
+            var x = Regex.Match(value, DiscountRegexPattern);
+            return x.ToString();
+        }
 
         public static decimal ConvertPriceToDecimal(string value)
         {
-            string formattedPrice = FormatPrice(value);
+            var formattedPrice = GetPriceMatchedByRegex(value);
             return decimal.Parse(formattedPrice);
         }
 
-        public static string ExtractBaseUrl(string url)
+        public static string ExtractBaseProductUrl(string url)
         {
-            if (url.Length == DataConstants.LongUrl)
-            {
-                return url.Substring(0, 42);
-            }
-            if (url.Length == DataConstants.ShortUrl)
-            {
-
-                return url.Substring(0, 39);
-            }
-
-            throw new ArgumentException("Provided url is invalid");
+            var x = Regex.Match(url, BaseImageUrlRegexPattern);
+            return x.ToString();
         }
 
     }

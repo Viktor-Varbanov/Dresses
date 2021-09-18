@@ -11,44 +11,36 @@
 
     {
 
-        public void ProductName(string expectedProductName, IWebElement nameLocator)
+        public void VerifyProductName(string expectedProductName, string displayedName)
         {
-            var actualProductName = nameLocator.Text;
-            Assert.AreEqual(expectedProductName, actualProductName, FailTestMessage.ActualDifferentFromExpected(expectedProductName, actualProductName));
+            Assert.AreEqual(expectedProductName, displayedName, FailTestMessage.ActualDifferentFromExpected(expectedProductName, displayedName));
         }
 
-        public void ProductColor(string expectedProductColor, IWebElement colorLocator)
+        public void VerifyProductColor(string expectedProductColor, string displayedProductColor)
         {
-            var actualProductColor = colorLocator.Text;
-            Assert.AreEqual(expectedProductColor, actualProductColor, FailTestMessage.ActualDifferentFromExpected(expectedProductColor, actualProductColor));
+            Assert.AreEqual(expectedProductColor, displayedProductColor, FailTestMessage.ActualDifferentFromExpected(expectedProductColor, displayedProductColor));
         }
 
-        public void ProductDescription(string expectedProductDescription, IWebElement descriptionLocator)
+        public void VerifyProductDescription(string expectedProductDescription, string displayedDescription)
         {
-            var actualProductDescription = descriptionLocator.Text;
-            Assert.AreEqual(expectedProductDescription, actualProductDescription,
-                FailTestMessage.ActualDifferentFromExpected(expectedProductDescription, actualProductDescription));
+            Assert.AreEqual(expectedProductDescription, displayedDescription,
+                FailTestMessage.ActualDifferentFromExpected(expectedProductDescription, displayedDescription));
         }
-        public void BaseImageUrl(string expectedBaseProductImageUrl, IWebElement imageUrlLocator)
+        public void VerifyBaseImageUrl(string expectedBaseProductImageUrl, string displayedProductUrl)
         {
-            var productUrl = imageUrlLocator.GetAttribute("src");
-            var actualBaseProductImageUrl = DataManipulation.ExtractBaseUrl(productUrl);
-            Assert.AreEqual(expectedBaseProductImageUrl, actualBaseProductImageUrl, FailTestMessage.ActualDifferentFromExpected(expectedBaseProductImageUrl, actualBaseProductImageUrl));
+            var displayedProductBaseImageUrl = DataManipulation.ExtractBaseProductUrl(displayedProductUrl);
+            Assert.AreEqual(expectedBaseProductImageUrl, displayedProductBaseImageUrl, FailTestMessage.ActualDifferentFromExpected(expectedBaseProductImageUrl, displayedProductBaseImageUrl));
         }
-        public void ProductPrice(decimal expectedProductPrice, IWebElement priceLocator)
+        public void VerifyProductPrice(decimal expectedProductPrice, string displayedProductPrice)
         {
-            var actualProductPrice = DataManipulation.ConvertPriceToDecimal(priceLocator.Text);
-            Assert.AreEqual(expectedProductPrice, actualProductPrice, FailTestMessage.ActualDifferentFromExpected(expectedProductPrice.ToString(), actualProductPrice.ToString()));
+            var actualProductPrice = DataManipulation.ConvertPriceToDecimal(displayedProductPrice);
+            Assert.AreEqual(expectedProductPrice, actualProductPrice, FailTestMessage.ActualDifferentFromExpected(expectedProductPrice, actualProductPrice));
         }
 
-        public void ProductSize(string expectedProductSize, IWebElement sizeLocator)
+        public void VerifyProductSize(string expectedProductSize, string displayedSize)
         {
-            var actualProductSize = sizeLocator.Text;
-            Assert.AreEqual(expectedProductSize, actualProductSize, FailTestMessage.ActualDifferentFromExpected(expectedProductSize, actualProductSize));
+            Assert.AreEqual(expectedProductSize, displayedSize, FailTestMessage.ActualDifferentFromExpected(expectedProductSize, displayedSize));
         }
-        public void AssertCorrectColorIsSelected(string expectedProductColor)
-        {
-           
-        }
+
     }
 }

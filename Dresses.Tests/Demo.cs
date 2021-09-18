@@ -3,6 +3,7 @@
     using Pages.Main;
     using NUnit.Framework;
     using Models;
+    using Pages.Facade;
     using Pages.QuickView;
 
     [TestFixture]
@@ -33,7 +34,7 @@
         public void ClickProductQuickViewVerifyTheInformationAndAddToCart()
         {
             //var product = _database.GetProductByName("Printed Chiffon Dress");
-            //product.BaseImageUrl = "http://automationpractice.com/img/p/2/2/22";
+            //product.VerifyBaseImageUrl = "http://automationpractice.com/img/p/2/2/22";
             //product.Color = "Green";
             //product.Size = "L";
             //product.Quantity = 2;
@@ -48,16 +49,49 @@
 
 
         [Test]
-        public void testNewClassImplementation()
+        public void NavigateToProduct_ClickQuickView_AndValidateInformationThere()
+        {
+            // --Arrange
+            var product = _database.GetProductByName("Blouse");
+            var quickViewPage = new QuickViewPage();
+            var mainPageNavigationToProductFacade =
+                new MainPageNavigationToProductQuickViewFacade(product.Name, product.BaseImageUrl);
+
+            // --Act
+            mainPageNavigationToProductFacade.GoToProduct();
+
+            // --Assert
+            quickViewPage.Validate.CorrectProductIsDisplayed(product);
+        }
+
+        [Test]
+        public void NavigateToProduct_ClickQuickView_ChangeInformation_AddToCard_ValidateCorrectProductIsAdded()
         {
             var product = _database.GetProductByName("Printed Chiffon Dress");
-            var mainPage = new MainPage(product);
-            mainPage.NavigateToPage();
-            mainPage.ScrollDownToDress();
-            mainPage.HoverDress();
-            mainPage.ClickQuickViewButton();
-            QuickViewPage quickViewPage = new QuickViewPage(product);
-            quickViewPage.Validate.VerifyCorrectProductIsSelected();
+            //var product = _database.GetProductByName("Printed Chiffon Dress");
+            //product.VerifyBaseImageUrl = "http://automationpractice.com/img/p/2/2/22";
+            //product.Color = "Green";
+            //product.Size = "L";
+            //product.Quantity = 2;
+            var quickViewPage = new QuickViewPage();
+            var mainPageNavigationToProductFacade =
+                new MainPageNavigationToProductQuickViewFacade(product.Name, product.BaseImageUrl);
+
+            // --Act
+            mainPageNavigationToProductFacade.GoToProduct();
+            quickViewPage.Validate.CorrectProductIsDisplayed(product);
+            var productNewValues = product;
+            productNewValues.BaseImageUrl = "http://automationpractice.com/img/p/2/2/22";
+            productNewValues.Color = "Green";
+            productNewValues.Size = "L";
+            productNewValues.Quantity = 2;
+            quickViewPage.ChangeSize("L");
+            quickViewPage.ChangeQuantity("2");
+            quickViewPage.ChangeColor("Green");
+            quickViewPage.Validate.CorrectChangesAreMade(productNewValues);
+            quickViewPage.AddToCart();
+
+
 
         }
 

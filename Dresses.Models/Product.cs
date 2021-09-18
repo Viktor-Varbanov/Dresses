@@ -20,7 +20,7 @@
 
         public string BaseImageUrl { get; set; }
 
-        public void ApplyDiscount(double percentage)
+        public void ApplyDiscount(decimal percentage)
             => Price = Math.Round(Price - Price * (decimal)(percentage / 100), 2);
 
     }

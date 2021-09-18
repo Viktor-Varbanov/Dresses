@@ -2,7 +2,7 @@
 {
     public static class FailTestMessage
     {
-        public static string ActualDifferentFromExpected(string expectedValue, string actualValue)
+        public static string ActualDifferentFromExpected(object expectedValue, object actualValue)
             => $"Expected value: {expectedValue}, Actual value: {actualValue}";
 
 

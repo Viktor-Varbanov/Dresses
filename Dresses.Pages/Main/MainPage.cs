@@ -2,41 +2,36 @@
 {
     using static Driver;
     using AbstractionPageComponents;
-    using Models;
     using OpenQA.Selenium;
     using OpenQA.Selenium.Interactions;
     using SeleniumExtras.WaitHelpers;
 
     public class MainPage : AbstractPage<MainPageElementMap>
     {
-        private readonly Product _product;
 
-        public MainPage(Product product)
-        {
-            _product = product;
-        }
 
         public void NavigateToPage()
         {
             Browser.Navigate().GoToUrl("http://automationpractice.com/index.php");
         }
 
-        public void ScrollDownToDress()
+        public void ScrollDownToDress(string productName, string productImageUrl)
         {
             ((IJavaScriptExecutor)Browser)
-                .ExecuteScript("arguments[0].scrollIntoView(true);", Map.GetDress(_product.Name, _product.BaseImageUrl));
+                .ExecuteScript("arguments[0].scrollIntoView(true);", Map.GetDress(productName, productImageUrl));
         }
 
-        public void HoverDress()
+        public void HoverDress(string productName, string productImageUrl)
         {
             var actions = new Actions(Browser);
-            actions.MoveToElement(Map.GetDress(_product.Name, _product.BaseImageUrl)).Perform();
+            actions.MoveToElement(Map.GetDress(productName, productImageUrl)).Perform();
         }
 
-        public void ClickQuickViewButton()
+        //extract at quick view
+        public void ClickQuickViewButton(string productName, string productImageUrl)
         {
-            var dress = Map.GetDressQuickView(_product.Name, _product.BaseImageUrl);
-            BrowserWait.Until(ExpectedConditions.ElementIsVisible(By.XPath(Map.GetDressQuickViewLocator(_product.Name, _product.BaseImageUrl))));
+            var dress = Map.GetDressQuickView(productName, productImageUrl);
+            BrowserWait.Until(ExpectedConditions.ElementIsVisible(By.XPath(Map.GetDressQuickViewLocator(productName, productImageUrl))));
             dress.Click();
             SwitchToIframe();
         }
