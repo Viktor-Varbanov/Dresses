@@ -24,27 +24,27 @@
         public void ScrollDownToDress()
         {
             ((IJavaScriptExecutor)Browser)
-                .ExecuteScript("arguments[0].scrollIntoView(true);", Map().GetDress(_product.Name, _product.BaseImageUrl));
+                .ExecuteScript("arguments[0].scrollIntoView(true);", Map.GetDress(_product.Name, _product.BaseImageUrl));
         }
 
         public void HoverDress()
         {
             var actions = new Actions(Browser);
-            actions.MoveToElement(Map().GetDress(_product.Name, _product.BaseImageUrl)).Perform();
+            actions.MoveToElement(Map.GetDress(_product.Name, _product.BaseImageUrl)).Perform();
         }
 
         public void ClickQuickViewButton()
         {
-            var dress = Driver.Browser.FindElement(By.XPath(Map().GetDressQuickView(_product.Name, _product.BaseImageUrl)));
-            BrowserWait.Until(ExpectedConditions.ElementIsVisible(By.XPath(Map().GetDressQuickView(_product.Name, _product.BaseImageUrl))));
+            var dress = Map.GetDressQuickView(_product.Name, _product.BaseImageUrl);
+            BrowserWait.Until(ExpectedConditions.ElementIsVisible(By.XPath(Map.GetDressQuickViewLocator(_product.Name, _product.BaseImageUrl))));
             dress.Click();
             SwitchToIframe();
         }
 
         private void SwitchToIframe()
         {
-            BrowserWait.Until(ExpectedConditions.ElementIsVisible(By.XPath("//iframe[@class='fancybox-iframe']")));
-            Browser.SwitchTo().Frame(Map().QuickViewIframeWindow);
+            BrowserWait.Until(ExpectedConditions.ElementIsVisible(By.XPath(Map.QuickViewIframeWindowLocator)));
+            Browser.SwitchTo().Frame(Map.QuickViewIframeWindow);
         }
     }
 }

@@ -1,13 +1,8 @@
 ﻿namespace Dresses.Tests
 {
-    using Common;
     using Pages.Main;
     using NUnit.Framework;
-    using OpenQA.Selenium;
     using Models;
-    using OpenQA.Selenium.Chrome;
-
-    using Pages.Facade;
     using Pages.QuickView;
 
     [TestFixture]
@@ -61,6 +56,9 @@
             mainPage.ScrollDownToDress();
             mainPage.HoverDress();
             mainPage.ClickQuickViewButton();
+            QuickViewPage quickViewPage = new QuickViewPage(product);
+            quickViewPage.Validate.VerifyCorrectProductIsSelected();
+
         }
 
 

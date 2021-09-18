@@ -12,7 +12,8 @@
     public class QuickViewValidator : ProductValidator<QuickViewPageElementMap>
 
     {
-     
-      
+
+
+
     }
 }

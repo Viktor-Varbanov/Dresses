@@ -5,7 +5,7 @@
 
     public class QuickViewVerificationFacade
     {
-        private readonly QuickViewPage _quickViewPage;
+
         private readonly Product _product;
 
         public QuickViewVerificationFacade(Product product)
@@ -13,34 +13,10 @@
             _product = product;
         }
 
-        public QuickViewPage QuickViewPage
-        {
-            get
-            {
-                if (_quickViewPage == null)
-                {
-                    return new QuickViewPage(_product);
-                }
-
-                return _quickViewPage;
-            }
-        }
-
+        private QuickViewPage _quickViewPage => new QuickViewPage();
         public void VerifyCorrectProductIsSelected()
         {
-            QuickViewPage.Validate().ProductName(_product.Name, QuickViewPage.Map().ProductName);
-            QuickViewPage.Validate().ProductColor(_product.Color, QuickViewPage.Map().);
+            _quickViewPage.Validate.ProductName(_product.Name, _quickViewPage.Ma);
         }
-        //public void VerifyCorrectItemIsSelected()
-        //{
-        //    QuickViewPage.AssertCorrectProductIsSelected();
-        //}
-
-        //public void ChangeProductInformation()
-        //{
-        //    QuickViewPage.ChangeColor(_product.Color);
-        //    QuickViewPage.ChangeSize(_product.Size);
-        //    QuickViewPage.ChangeQuantity(_product.Quantity.ToString());
-        //}
     }
 }
