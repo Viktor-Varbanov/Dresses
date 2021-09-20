@@ -1,27 +1,30 @@
 ﻿namespace Dresses.Pages
 {
+    using FluentAssertions;
     using AbstractionPageComponents;
     using Common;
     using NUnit.Framework;
+    using Shouldly;
 
     public abstract class ProductValidator<TMap> : AbstractValidator<TMap>
         where TMap : AbstractElementMap, new()
 
     {
-        public void VerifyProductName(string expectedProductName, string displayedName)
+        public void VerifyProductName(string expectedProductName, string displayedProductName)
         {
-            Assert.AreEqual(expectedProductName, displayedName, FailTestMessage.ActualDifferentFromExpected(expectedProductName, displayedName));
+
+            displayedProductName.Should().BeEquivalentTo(expectedProductName);
         }
 
+        public abstract void VerifyCorrectProductNameIsDisplayed(string expectedProductName);
         public void VerifyProductColor(string expectedProductColor, string displayedProductColor)
         {
-            Assert.AreEqual(expectedProductColor, displayedProductColor, FailTestMessage.ActualDifferentFromExpected(expectedProductColor, displayedProductColor));
+            displayedProductColor.Should().BeEquivalentTo(expectedProductColor);
         }
 
-        public void VerifyProductDescription(string expectedProductDescription, string displayedDescription)
+        public void VerifyProductDescription(string expectedProductDescription, string displayedProductDescription)
         {
-            Assert.AreEqual(expectedProductDescription, displayedDescription,
-                FailTestMessage.ActualDifferentFromExpected(expectedProductDescription, displayedDescription));
+            displayedProductDescription.Should().BeEquivalentTo(expectedProductDescription);
         }
 
         public void VerifyBaseImageUrl(string expectedBaseProductImageUrl, string displayedProductUrl)
@@ -30,15 +33,14 @@
             Assert.AreEqual(expectedBaseProductImageUrl, displayedProductBaseImageUrl, FailTestMessage.ActualDifferentFromExpected(expectedBaseProductImageUrl, displayedProductBaseImageUrl));
         }
 
-        public void VerifyProductPrice(decimal expectedProductPrice, string displayedProductPrice)
+        public void VerifyProductPrice(decimal expectedProductPrice, decimal displayedProductPrice)
         {
-            var actualProductPrice = DataManipulation.ConvertPriceToDecimal(displayedProductPrice);
-            Assert.AreEqual(expectedProductPrice, actualProductPrice, FailTestMessage.ActualDifferentFromExpected(expectedProductPrice, actualProductPrice));
+            displayedProductPrice.Should().ShouldBeEquivalentTo(expectedProductPrice, FailTestMessage.ActualDifferentFromExpected(expectedProductPrice, displayedProductPrice));
         }
 
-        public void VerifyProductSize(string expectedProductSize, string displayedSize)
+        public void VerifyProductSize(string expectedProductSize, string displayedProductSize)
         {
-            Assert.AreEqual(expectedProductSize, displayedSize, FailTestMessage.ActualDifferentFromExpected(expectedProductSize, displayedSize));
+            displayedProductSize.Should().BeEquivalentTo(expectedProductSize, FailTestMessage.ActualDifferentFromExpected(expectedProductSize, displayedProductSize));
         }
     }
 }

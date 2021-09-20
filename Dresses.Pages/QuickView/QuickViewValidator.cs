@@ -3,6 +3,8 @@
     using Common;
     using Models;
     using System.Threading;
+    using FluentAssertions;
+    using Shouldly;
 
     public class QuickViewValidator : ProductValidator<QuickViewPageElementMap>
     {
@@ -19,7 +21,7 @@
                 var actualDiscount = DataManipulation.ConvertPriceToDecimal(displayedPercentage);
                 product.ApplyDiscount(actualDiscount);
             }
-            VerifyProductPrice(product.Price, Map.ProductPrice.Text);
+            // VerifyProductPrice(product.Price, Map.ProductPrice.Text);
             VerifyProductColor(product.Color, Map.PickedColor.GetAttribute("name"));
         }
 
@@ -34,5 +36,10 @@
 
         private bool CheckForDiscount
             => Map.ProductDiscount.Displayed;
+
+        public override void VerifyCorrectProductNameIsDisplayed(string expectedProductName)
+        {
+            expectedProductName.Should().ShouldBeEquivalentTo(Map.ProductName.Text);
+        }
     }
 }

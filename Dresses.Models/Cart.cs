@@ -1,5 +1,6 @@
 ﻿namespace Dresses.Models
 {
+    using System;
     using System.Collections.Generic;
     using System.Linq;
 
@@ -31,6 +32,15 @@
                 sum += product.Quantity * product.Price;
             }
             return sum + ShippingCost;
+        }
+
+        public static decimal GetProductTotalPriceById(string productId)
+        {
+            var targetProduct = _products.FirstOrDefault(x => x.Id == productId);
+            if (targetProduct == null)
+                throw new ArgumentException($"Product with Id: {productId} doesn't exist in the cart.");
+
+            return targetProduct.Quantity * targetProduct.Price;
         }
     }
 }

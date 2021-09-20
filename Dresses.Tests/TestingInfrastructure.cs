@@ -1,7 +1,6 @@
 ﻿namespace Dresses.Tests
 {
     using Common;
-    using Models;
     using NUnit.Framework;
     using Shouldly;
 
@@ -35,6 +34,7 @@
             // --Assert
             Assert.AreEqual(expectedUrl, cuttedUrl);
         }
+
         [Test]
         public void BuildXpathWithOneArgument()
         {
@@ -50,10 +50,10 @@
             actualValue.ShouldBeEquivalentTo(expectedValue);
         }
 
-
         [Test]
         public void BuildXpathWithTwoArguments()
         {
+            // --Arrange
             var basePath = "//tbody//tr[@id='{0}']";
             var extensionPath = "//child::input[@type='hidden' and @name='{1}']";
             var argument = "product_1_1_0_0";
@@ -65,5 +65,12 @@
             actualValue.ShouldBeEquivalentTo(expectedValue);
         }
 
+
+        [Test]
+        public void TestingRegexForColorAndSize()
+        {
+            var x = DataManipulation.GetProductColorByRegex(
+                "http://automationpractice.com/index.php?id_product=6&controller=product#/size-s/color-yellow");
+        }
     }
 }

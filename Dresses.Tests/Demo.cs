@@ -2,6 +2,7 @@
 {
     using Models;
     using NUnit.Framework;
+    using Pages.Cart;
     using Pages.Facade;
     using Pages.PurchaseSummary;
     using Pages.QuickView;
@@ -91,6 +92,28 @@
             purchaseSummaryPage.Validate.ItemSuccessfullyAddedToCart();
             purchaseSummaryPage.Validate.CorrectProductIsAddedToCart(productNewValues);
             purchaseSummaryPage.ProceedToCheckout();
+        }
+
+
+        [Test]
+        public void NavigateToProduct_ClickQuickView_AddToCart_VerifyCorrectProductIsAddToCart()
+        {
+            var product = _database.GetProductByName("Blouse");
+            var quickViewPage = new QuickViewPage();
+            var mainPageNavigationToProductFacade =
+                new MainPageNavigationToProductQuickViewFacade(product.Name, product.BaseImageUrl);
+            var quickViewValidationFacade = new QuickViewValidationFacade();
+            var cartPage = new CartPage();
+            // --Act
+            mainPageNavigationToProductFacade.GoToProduct();
+            quickViewValidationFacade.ValidateCorrectProductIsSelected(product);
+            quickViewPage.AddToCart(product);
+            var purchaseSummaryPage = new PurchaseSummaryPage();
+            purchaseSummaryPage.Validate.ItemSuccessfullyAddedToCart();
+            purchaseSummaryPage.Validate.CorrectProductIsAddedToCart(product);
+            purchaseSummaryPage.ProceedToCheckout();
+            cartPage.Validate.VerifyInformation(product);
+
         }
 
         [TearDown]

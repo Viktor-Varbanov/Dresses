@@ -23,7 +23,8 @@ namespace Dresses.Models
                 Price = 27.00m,
                 Color = "Black",
                 Size = "S",
-                Id = "product_2_7_0_0"
+                Id = "product_2_7_0_0",
+                Availability="In stock"
             });
             products.Add(new Product()
             {

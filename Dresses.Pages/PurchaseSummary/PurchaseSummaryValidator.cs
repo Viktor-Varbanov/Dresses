@@ -35,5 +35,9 @@
 
         //0 for color, 1 for size
         private string[] SplitAttributes => Map.ProductColorAndSize.Text.Split(", ").ToArray();
+        public override void VerifyCorrectProductNameIsDisplayed(string expectedProductName)
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }

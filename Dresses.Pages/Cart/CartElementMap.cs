@@ -19,16 +19,20 @@
 
         public IWebElement ProductPrice(string productId) => driver.FindElement(By.XPath(XPathBuilder.BuildXpath(BaseProductXpath, "//child::td[@class='cart_unit']", productId)));
 
-        public IWebElement ProductQuantity(string productId) => driver.FindElement(
-            By.XPath(XPathBuilder.BuildXpath(BaseProductXpath, "//child::input[@type='hidden' and @name='{1}']",
-                productId, productId)));
+        public IWebElement ProductQuantity(string productId)
+        {
+            string nameId = productId.Replace("product", "quantity");
+            string finalName = nameId + "_hidden";
+            return driver.FindElement(
+                By.XPath(XPathBuilder.BuildXpath(BaseProductXpath, "//child::input[@type='hidden' and @name='{1}']",
+                      productId, finalName)));
 
+        }
         public IWebElement ProductAvailability(string productId) => driver.FindElement(
             By.XPath(XPathBuilder.BuildXpath(BaseProductXpath, "//child::td[@class='cart_avail']//span", productId)));
 
         public IWebElement TotalPriceForProduct(string productId) => driver.FindElement(
-            By.XPath(XPathBuilder.BuildXpath(BaseProductXpath, "//child::td[@class='cart_total']", productId)));
-
+            By.XPath(XPathBuilder.BuildXpath(BaseProductXpath, "//child::td[@class='cart_total']//span", productId)));
 
         public IWebElement TotalProductsPrice =>
             driver.FindElement(By.XPath("//div[@id='center_column']//tfoot//td[@id='total_product']"));
@@ -40,9 +44,5 @@
             driver.FindElement(By.XPath("//div[@id='center_column']//tfoot//td[@id='total_price_without_tax']"));
 
         public IWebElement Taxes => driver.FindElement(By.XPath("//div[@id='center_column']//tfoot//td[@id='total_tax']"));
-
-
-
-
     }
 }

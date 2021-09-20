@@ -8,6 +8,8 @@
 
         private const string BaseImageUrlRegexPattern = "[^-]*";
 
+        private const string ColorAndSizeRegexPattern = "-([a-z]*)";
+
         private static string GetPriceMatchedByRegex(string value)
         {
             var x = Regex.Match(value, DiscountRegexPattern);
@@ -24,6 +26,18 @@
         {
             var x = Regex.Match(url, BaseImageUrlRegexPattern);
             return x.ToString();
+        }
+
+        public static string GetProductColorByRegex(string input)
+        {
+            var x = Regex.Matches(input, ColorAndSizeRegexPattern);
+            return x[1].ToString().Remove(0, 1);
+        }
+
+        public static string GetProductSizeByRegex(string input)
+        {
+            var x = Regex.Matches(input, ColorAndSizeRegexPattern);
+            return x[0].ToString().Remove(0, 1);
         }
     }
 }
