@@ -17,4 +17,8 @@
     <ProjectReference Include="..\Dresses.Models\Dresses.Models.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Facade\" />
+  </ItemGroup>
+
 </Project>

@@ -6,34 +6,6 @@
 
     public class QuickViewValidator : ProductValidator<QuickViewPageElementMap>
     {
-        //public void CorrectProductIsDisplayed(Product product)
-        //{
-        //    VerifyProductName(product.Name, Map.Name.Text);
-        //    VerifyProductSize(product.Size, Map.Size.Text);
-        //    VerifyProductDescription(product.Description, Map.Description.Text);
-        //    VerifyBaseImageUrl(product.BaseImageUrl, Map.Image.GetAttribute("src"));
-        //    if (CheckForDiscount && !product.IsDiscountApplied)
-        //    {
-        //        product.IsDiscountApplied = true;
-        //        var displayedPercentage = Map.Discount.Text;
-        //        var actualDiscount = DataManipulation.ConvertPriceToDecimal(displayedPercentage);
-        //        product.ApplyDiscount(actualDiscount);
-        //    }
-        //    // VerifyProductPrice(product.Price, Map.Price.Text);
-        //    VerifyProductColor(product.Color, Map.PickedColor.GetAttribute("name"));
-        //}
-
-        //public void CorrectChangesAreMade(Product product)
-        //{
-        //    VerifyProductSize(product.Size, Map.Size.Text);
-        //    VerifyBaseImageUrl(product.BaseImageUrl, Map.Image.GetAttribute("src"));
-        //    Thread.Sleep(2000);
-
-        //    VerifyProductColor(product.Color, Map.PickedColor.GetAttribute("name"));
-        //}
-
-        //private bool CheckForDiscount
-        //    => Map.Discount.Displayed;
 
         public override void CorrectProductNameIsDisplayed(string expectedProductName)
         {
@@ -76,7 +48,7 @@
         public void CorrectProductModelIsDisplayed(string expectedProductModel)
         {
             string displayedProductModel = Map.Model.Text;
-            displayedProductModel.Should().BeEquivalentTo(displayedProductModel);
+            displayedProductModel.Should().BeEquivalentTo(expectedProductModel);
         }
 
         public void CorrectDiscountIsDisplayed(double expectedDiscount)
@@ -86,6 +58,5 @@
             expectedDiscount.Should().BeApproximately(actualDiscount, 2);
         }
 
-        
     }
 }

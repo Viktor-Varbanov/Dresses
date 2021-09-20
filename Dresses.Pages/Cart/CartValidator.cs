@@ -9,7 +9,7 @@
 
         //public void Navigated()
         //{
-        //    Assert.AreEqual("Order - My Store", Driver.Browser.Title);
+        //    Assert.AreEqual("Order - My Store", driver.Browser.Title);
         //}
 
         //public void VerifyInformation(Product product)

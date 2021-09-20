@@ -11,8 +11,8 @@
 
         public IWebElement ProductName => driver.FindElement(By.Id("layer_cart_product_title"));
 
-        public IWebElement ProductImageUrl(string url) =>
-            driver.FindElement(By.XPath($"//img[contains(@src, '{url}')]"));
+        public IWebElement ProductImageUrl =>
+            driver.FindElement(By.XPath("//div[@id='layer_cart']//child::div//img"));
 
         public IWebElement ProductQuantity => driver.FindElement(By.Id("layer_cart_product_quantity"));
 

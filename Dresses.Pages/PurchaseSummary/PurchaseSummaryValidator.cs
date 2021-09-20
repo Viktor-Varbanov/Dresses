@@ -1,12 +1,13 @@
 ﻿namespace Dresses.Pages.PurchaseSummary
 {
-    using Common;
-    using Models;
-    using NUnit.Framework;
     using System.Linq;
+    using Common;
+    using FluentAssertions;
 
     public class PurchaseSummaryValidator : ProductValidator<PurchaseSummaryElementMap>
     {
+        // [0] for color, [1] for size
+        private string[] _productAttributes => Map.ProductColorAndSize.Text.Split(", ").ToArray();
         //public void ItemSuccessfullyAddedToCart()
         //{
         //    var headingText = Map.SuccessfulMessage.Text;
@@ -37,17 +38,21 @@
         //private string[] SplitAttributes => Map.ProductColorAndSize.Text.Split(", ").ToArray();
         public override void CorrectProductNameIsDisplayed(string expectedProductName)
         {
-            throw new System.NotImplementedException();
+            string displayedProductName = Map.ProductName.Text;
+            displayedProductName.Should().BeEquivalentTo(expectedProductName);
         }
 
         public override void CorrectProductImageUrlIsDisplayed(string expectedBaseProductImageUrl)
         {
-            throw new System.NotImplementedException();
+            string displayedProductFullImageUrl = Map.ProductImageUrl.GetAttribute("src");
+            string displayedProductBaseImageUr = DataManipulation.ExtractBaseProductUrl(displayedProductFullImageUrl);
+            displayedProductBaseImageUr.Should().BeEquivalentTo(expectedBaseProductImageUrl);
         }
 
         public override void CorrectProductColorIsDisplayed(string expectedProductColor)
         {
-            throw new System.NotImplementedException();
+            string displayedProductColor = _productAttributes[0];
+            displayedProductColor.Should().BeEquivalentTo(expectedProductColor);
         }
 
         public override void CorrectProductPriceIsDisplayed(decimal expectedProductPrice)
@@ -58,6 +63,11 @@
         public override void CorrectProductSizeIsDisplayed(string expectedProductSize)
         {
             throw new System.NotImplementedException();
+        }
+
+        public void CorrectProductQuantityIsDisplayed(int productQuantity)
+        {
+
         }
     }
 }
