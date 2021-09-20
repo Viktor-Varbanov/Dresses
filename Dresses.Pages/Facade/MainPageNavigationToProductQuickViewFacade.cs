@@ -20,7 +20,7 @@
         {
             _mainPage.NavigateToPage();
             _mainPage.ScrollDownToDress(_productName, _productImageUrl);
-            _mainPage.HoverDress(_productName, _productImageUrl);
+            //  _mainPage.HoverDress(_productName, _productImageUrl);
             _mainPage.ClickQuickViewButton(_productName, _productImageUrl);
         }
     }

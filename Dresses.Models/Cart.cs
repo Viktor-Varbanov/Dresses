@@ -1,32 +1,37 @@
 ﻿namespace Dresses.Models
 {
-    using System;
     using System.Collections.Generic;
     using System.Linq;
-    using System.Text;
-    using System.Threading.Tasks;
 
-    public class Cart
+    public static class Cart
     {
-        public List<Product> Products { get; set; }
-        private decimal sum;
+        private static List<Product> _products = new List<Product>();
+        private const decimal ShippingCost = 2.00m;
 
-        public Cart()
+        public static void AddProductToCart(Product product)
         {
-            Products = new List<Product>();
+            var productInCart =
+                _products.FirstOrDefault(x => x.Color == product.Color && x.Name == product.Name);
+            if (productInCart != null)
+            {
+                productInCart.Quantity += product.Quantity;
+            }
+            else
+            {
+                _products.Add(product);
+            }
         }
 
-        public decimal Total => CalculateSum();
-
-
-        private decimal CalculateSum()
+        public static decimal CalculateSum()
         {
-            foreach (var product in Products)
+            decimal sum = 0;
+
+            foreach (var product in _products)
             {
                 sum += product.Quantity * product.Price;
             }
-
-            return sum;
+            return sum + ShippingCost;
         }
+
     }
 }

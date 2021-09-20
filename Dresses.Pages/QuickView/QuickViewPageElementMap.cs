@@ -31,6 +31,9 @@
 
         public IWebElement PickedColor => driver.FindElement(By.CssSelector("li.selected > a"));
 
+        public IWebElement LayerCart => driver.FindElement(By.Id("layer_cart"));
+
+
 
 
     }

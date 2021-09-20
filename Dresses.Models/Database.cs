@@ -22,7 +22,8 @@ namespace Dresses.Models
                 BaseImageUrl = "http://automationpractice.com/img/p/7/7",
                 Price = 27.00m,
                 Color = "Black",
-                Size = "S"
+                Size = "S",
+                Id = "product_2_7_0_0"
             });
             products.Add(new Product()
             {

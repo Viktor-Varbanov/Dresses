@@ -1,6 +1,7 @@
 ﻿namespace Dresses.Tests
 {
     using Common;
+    using Models;
     using NUnit.Framework;
 
     [TestFixture]
@@ -33,6 +34,22 @@
             // --Assert
             Assert.AreEqual(expectedUrl, cuttedUrl);
         }
+
+        [Test]
+        public void AddCartShouldAddNewProduct_When_ItDoesNotExistInTheCart()
+        {
+            // --Arrange
+            var database = new Database();
+            var product = database.GetProductByName("Blouse");
+
+            // --Act
+            Cart.AddProductToCart(product);
+
+            // --Assert
+            Assert.AreEqual(27.00m, Cart.CalculateSum());
+        }
+
+        
     }
 
 }

@@ -4,6 +4,7 @@
     using NUnit.Framework;
     using Models;
     using Pages.Facade;
+    using Pages.PurchaseSummary;
     using Pages.QuickView;
 
     [TestFixture]
@@ -53,15 +54,15 @@
         {
             // --Arrange
             var product = _database.GetProductByName("Blouse");
-            var quickViewPage = new QuickViewPage();
             var mainPageNavigationToProductFacade =
                 new MainPageNavigationToProductQuickViewFacade(product.Name, product.BaseImageUrl);
+            var quickViewValidationFacade = new QuickViewValidationFacade();
 
             // --Act
             mainPageNavigationToProductFacade.GoToProduct();
 
             // --Assert
-            quickViewPage.Validate.CorrectProductIsDisplayed(product);
+            quickViewValidationFacade.ValidateCorrectProductIsSelected(product);
         }
 
         [Test]
@@ -89,7 +90,11 @@
             quickViewPage.ChangeQuantity("2");
             quickViewPage.ChangeColor("Green");
             quickViewPage.Validate.CorrectChangesAreMade(productNewValues);
-            quickViewPage.AddToCart();
+            quickViewPage.AddToCart(productNewValues);
+            PurchaseSummaryPage purchaseSummaryPage = new PurchaseSummaryPage();
+            purchaseSummaryPage.Validate.ItemSuccessfullyAddedToCart();
+            purchaseSummaryPage.Validate.CorrectProductIsAddedToCart(productNewValues);
+            purchaseSummaryPage.ProceedToCheckout();
 
 
 

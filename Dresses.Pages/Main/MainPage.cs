@@ -21,15 +21,17 @@
                 .ExecuteScript("arguments[0].scrollIntoView(true);", Map.GetDress(productName, productImageUrl));
         }
 
-        public void HoverDress(string productName, string productImageUrl)
-        {
-            var actions = new Actions(Browser);
-            actions.MoveToElement(Map.GetDress(productName, productImageUrl)).Perform();
-        }
+        //public void HoverDress(string productName, string productImageUrl)
+        //{
+        //    var actions = new Actions(Browser);
+        //    actions.MoveToElement(Map.GetDress(productName, productImageUrl)).Perform();
+        //}
 
         //extract at quick view
         public void ClickQuickViewButton(string productName, string productImageUrl)
         {
+            var actions = new Actions(Browser);
+            actions.MoveToElement(Map.GetDress(productName, productImageUrl)).Perform();
             var dress = Map.GetDressQuickView(productName, productImageUrl);
             BrowserWait.Until(ExpectedConditions.ElementIsVisible(By.XPath(Map.GetDressQuickViewLocator(productName, productImageUrl))));
             dress.Click();
