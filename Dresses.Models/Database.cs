@@ -24,7 +24,9 @@ namespace Dresses.Models
                 Color = "Black",
                 Size = "S",
                 Id = "product_2_7_0_0",
-                Availability="In stock"
+                Availability = "In stock",
+                HasDiscount = false,
+                Model = "demo_2"
             });
             products.Add(new Product()
             {
@@ -33,7 +35,10 @@ namespace Dresses.Models
                 BaseImageUrl = "http://automationpractice.com/img/p/2/0/20",
                 Price = 20.50m,
                 Color = "Yellow",
-                Size = "S"
+                Size = "S",
+                HasDiscount = true,
+                PercentageDiscount = 20,
+                Model = "demo_7"
             });
             products.Add(new Product()
             {

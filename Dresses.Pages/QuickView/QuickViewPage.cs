@@ -26,14 +26,14 @@
 
         public void ChangeSize(string size)
         {
-            var dropdown = new SelectElement(Map.ProductSizeDropdown);
+            var dropdown = new SelectElement(Map.SizeDropdown);
             dropdown.SelectByText(size);
         }
 
         public void ChangeQuantity(string quantity)
         {
-            Map.ProductQuantity.Clear();
-            Map.ProductQuantity.SendKeys(quantity);
+            Map.QuantityInputField.Clear();
+            Map.QuantityInputField.SendKeys(quantity);
         }
 
         private void SwitchToCart()

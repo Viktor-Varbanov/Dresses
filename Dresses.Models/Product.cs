@@ -4,11 +4,31 @@
 
     public class Product
     {
+        private decimal _price;
+
         public string Id { get; set; }
-        public bool IsDiscountApplied { get; set; }
+        public bool HasDiscount { get; set; }
+
+        public string Model { get; set; }
+        public double PercentageDiscount { get; set; }
         public string Name { get; set; }
 
-        public decimal Price { get; set; }
+        public decimal Price
+        {
+            get
+            {
+                if (HasDiscount)
+                {
+                    ApplyDiscount(PercentageDiscount);
+                    HasDiscount = false;
+                    return _price;
+
+                }
+
+                return _price;
+            }
+            set => _price = value;
+        }
 
         public string Description { get; set; }
 
@@ -22,7 +42,11 @@
         public string BaseImageUrl { get; set; }
         public string Availability { get; set; }
 
-        public void ApplyDiscount(decimal percentage)
-            => Price = Math.Round(Price - Price * (decimal)(percentage / 100), 2);
+        private void ApplyDiscount(double percentage)
+        {
+            _price = Math.Round(_price - _price * (decimal)(percentage / 100), 2);
+
+        }
+
     }
 }

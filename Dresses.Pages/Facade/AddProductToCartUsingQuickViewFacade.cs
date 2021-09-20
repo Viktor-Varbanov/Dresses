@@ -21,10 +21,10 @@
 
         public void PurchaseItem(string productId, string productImageUrl, string productName, Product product)
         {
-            _mainPage.NavigateToPage();
-            _mainPage.ScrollDownToDress(productName, productImageUrl);
-            _mainPage.ClickQuickViewButton(productName, productImageUrl);
-            _quickViewPage.Validate.CorrectProductIsDisplayed(product);
+            //_mainPage.NavigateToPage();
+            //_mainPage.ScrollDownToDress(productName, productImageUrl);
+            //_mainPage.ClickQuickViewButton(productName, productImageUrl);
+            //_quickViewPage.Validate.VerifyProductName(product.Name, );
         }
     }
 }
