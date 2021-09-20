@@ -1,13 +1,14 @@
-﻿using System;
-using OpenQA.Selenium;
+﻿using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Firefox;
 using OpenQA.Selenium.Support.UI;
+using System;
 
 public static class Driver
 {
     private static WebDriverWait browserWait;
     private static IWebDriver browser;
+
     public static IWebDriver Browser
     {
         get
@@ -23,6 +24,7 @@ public static class Driver
             browser = value;
         }
     }
+
     public static WebDriverWait BrowserWait
     {
         get
@@ -38,27 +40,31 @@ public static class Driver
             browserWait = value;
         }
     }
+
     public static void StartBrowser(BrowserTypes browserType = BrowserTypes.Chrome, int defaultTimeOut = 30)
     {
         switch (browserType)
         {
             case BrowserTypes.Firefox:
-                Driver.Browser = new FirefoxDriver();
+                Browser = new FirefoxDriver();
                 break;
+
             case BrowserTypes.InternetExplorer:
                 break;
+
             case BrowserTypes.Chrome:
                 ChromeOptions chromeOptions = new ChromeOptions();
                 chromeOptions.AddArgument("start-maximized");
 
-
-                Driver.Browser = new ChromeDriver(chromeOptions);
+                Browser = new ChromeDriver(chromeOptions);
                 break;
+
             default:
                 break;
         }
         BrowserWait = new WebDriverWait(Driver.Browser, TimeSpan.FromSeconds(defaultTimeOut));
     }
+
     public static void StopBrowser()
     {
         Browser.Quit();

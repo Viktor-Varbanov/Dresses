@@ -32,6 +32,5 @@
             }
             return sum + ShippingCost;
         }
-
     }
 }

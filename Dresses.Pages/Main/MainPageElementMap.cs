@@ -19,11 +19,9 @@
 
             return driver.FindElement(By.XPath(xpath));
         }
+
         public IWebElement QuickViewIframeWindow => driver.FindElement(By.XPath("//iframe[@class='fancybox-iframe']"));
 
         public string QuickViewIframeWindowLocator => "//iframe[@class='fancybox-iframe']";
-
-
-
     }
 }

@@ -1,16 +1,15 @@
 ﻿namespace Dresses.Pages.QuickView
 {
-    using System;
-    using System.Threading;
     using AbstractionPageComponents;
     using Models;
     using OpenQA.Selenium;
     using OpenQA.Selenium.Support.UI;
     using SeleniumExtras.WaitHelpers;
+    using System;
+    using System.Threading;
 
     public class QuickViewPage : AbstractPageWithValidator<QuickViewPageElementMap, QuickViewValidator>
     {
-
         public void AddToCart(Product product)
         {
             Cart.AddProductToCart(product);
@@ -41,8 +40,6 @@
         {
             WebDriverWait wait = new WebDriverWait(Driver.Browser, TimeSpan.FromSeconds(20));
             wait.Until(ExpectedConditions.ElementIsVisible(By.Id("layer_cart")));
-
         }
-
     }
 }

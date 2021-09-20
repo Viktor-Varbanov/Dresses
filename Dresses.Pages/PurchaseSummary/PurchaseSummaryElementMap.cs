@@ -5,20 +5,20 @@
 
     public class PurchaseSummaryElementMap : AbstractElementMap
     {
-
         //Product Information
         public IWebElement SuccessfulMessage =>
             driver.FindElement(By.XPath("//div[@class='layer_cart_product col-xs-12 col-md-6']//h2"));
+
         public IWebElement ProductName => driver.FindElement(By.Id("layer_cart_product_title"));
 
         public IWebElement ProductImageUrl(string url) =>
             driver.FindElement(By.XPath($"//img[contains(@src, '{url}')]"));
+
         public IWebElement ProductQuantity => driver.FindElement(By.Id("layer_cart_product_quantity"));
 
         public IWebElement Total => driver.FindElement(By.Id("layer_cart_product_price"));
 
         public IWebElement ProductColorAndSize => driver.FindElement(By.Id("layer_cart_product_attributes"));
-
 
         //Cart state
 
@@ -36,9 +36,5 @@
         //That doesnt work by first lets make assertions
         public IWebElement ProceedToCheckout =>
             driver.FindElement(By.XPath("//div[@class='button-container']//a[@href='http://automationpractice.com/index.php?controller=order']"));
-
-
-
-
     }
 }

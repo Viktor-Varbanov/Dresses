@@ -7,7 +7,6 @@
     [TestFixture]
     public class AddNewProductShould
     {
-
         private Database _database;
 
         [OneTimeSetUp]
@@ -15,6 +14,7 @@
         {
             _database = new Database();
         }
+
         [Test]
         public void AddNewProduct_When_ItDoesNotExist()
         {
@@ -45,6 +45,5 @@
             // --Assert
             actualSum.ShouldBe(expectedSum);
         }
-
     }
 }

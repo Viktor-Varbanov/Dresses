@@ -1,15 +1,13 @@
 ﻿namespace Dresses.Pages.Main
 {
-    using static Driver;
     using AbstractionPageComponents;
     using OpenQA.Selenium;
     using OpenQA.Selenium.Interactions;
     using SeleniumExtras.WaitHelpers;
+    using static Driver;
 
     public class MainPage : AbstractPage<MainPageElementMap>
     {
-
-
         public void NavigateToPage()
         {
             Browser.Navigate().GoToUrl("http://automationpractice.com/index.php");

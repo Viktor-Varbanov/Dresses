@@ -1,8 +1,8 @@
 ﻿namespace Dresses.Pages.QuickView
 {
-    using System.Threading;
     using Common;
     using Models;
+    using System.Threading;
 
     public class QuickViewValidator : ProductValidator<QuickViewPageElementMap>
     {
@@ -12,8 +12,9 @@
             VerifyProductSize(product.Size, Map.ProductSizeValue.Text);
             VerifyProductDescription(product.Description, Map.ProductDescription.Text);
             VerifyBaseImageUrl(product.BaseImageUrl, Map.ProductImage.GetAttribute("src"));
-            if (CheckForDiscount)
+            if (CheckForDiscount && !product.IsDiscountApplied)
             {
+                product.IsDiscountApplied = true;
                 var displayedPercentage = Map.ProductDiscount.Text;
                 var actualDiscount = DataManipulation.ConvertPriceToDecimal(displayedPercentage);
                 product.ApplyDiscount(actualDiscount);
@@ -29,8 +30,8 @@
             Thread.Sleep(2000);
 
             VerifyProductColor(product.Color, Map.PickedColor.GetAttribute("name"));
-
         }
+
         private bool CheckForDiscount
             => Map.ProductDiscount.Displayed;
     }

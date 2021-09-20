@@ -1,9 +1,9 @@
 ﻿namespace Dresses.Pages.PurchaseSummary
 {
-    using System.Linq;
     using Common;
     using Models;
     using NUnit.Framework;
+    using System.Linq;
 
     public class PurchaseSummaryValidator : ProductValidator<PurchaseSummaryElementMap>
     {
@@ -12,6 +12,7 @@
             var headingText = Map.SuccessfulMessage.Text;
             Assert.AreEqual("Product successfully added to your shopping cart", headingText);
         }
+
         public void CorrectProductIsAddedToCart(Product product)
         {
             VerifyProductName(product.Name, Map.ProductName.Text);
@@ -20,7 +21,6 @@
             VerifyProductTotalPrice(product.Quantity * product.Price, DataManipulation.ConvertPriceToDecimal(Map.Total.Text));
             VerifyProductColor(product.Color, SplitAttributes[0]);
             VerifyProductSize(product.Size, SplitAttributes[1]);
-
         }
 
         public void VerifyProductQuantity(int expectedProductQuantity, int actualProductQuantity)
@@ -33,9 +33,7 @@
             Assert.AreEqual(expectedTotalPrice, actualTotalPrice, FailTestMessage.ActualDifferentFromExpected(expectedTotalPrice, actualTotalPrice));
         }
 
-
         //0 for color, 1 for size
         private string[] SplitAttributes => Map.ProductColorAndSize.Text.Split(", ").ToArray();
-
     }
 }

@@ -3,6 +3,7 @@
     using Common;
     using Models;
     using NUnit.Framework;
+    using Shouldly;
 
     [TestFixture]
     public class TestingInfrastructure
@@ -34,22 +35,35 @@
             // --Assert
             Assert.AreEqual(expectedUrl, cuttedUrl);
         }
-
         [Test]
-        public void AddCartShouldAddNewProduct_When_ItDoesNotExistInTheCart()
+        public void BuildXpathWithOneArgument()
         {
             // --Arrange
-            var database = new Database();
-            var product = database.GetProductByName("Blouse");
-
+            var basePath = "//tbody//tr[@id='{0}']";
+            var extensionPath = "//child::td[@class='cart_product']//img";
+            var argument = "product_1_1_0_0";
+            var expectedValue = "//tbody//tr[@id='product_1_1_0_0']//child::td[@class='cart_product']//img";
             // --Act
-            Cart.AddProductToCart(product);
+            string actualValue = XPathBuilder.BuildXpath(basePath, extensionPath, argument);
 
             // --Assert
-            Assert.AreEqual(27.00m, Cart.CalculateSum());
+            actualValue.ShouldBeEquivalentTo(expectedValue);
         }
 
-        
-    }
 
+        [Test]
+        public void BuildXpathWithTwoArguments()
+        {
+            var basePath = "//tbody//tr[@id='{0}']";
+            var extensionPath = "//child::input[@type='hidden' and @name='{1}']";
+            var argument = "product_1_1_0_0";
+            var expectedValue = "//tbody//tr[@id='product_1_1_0_0']//child::input[@type='hidden' and @name='product_1_1_0_0']";
+            // --Act
+            string actualValue = XPathBuilder.BuildXpath(basePath, extensionPath, argument, argument);
+
+            // --Assert
+            actualValue.ShouldBeEquivalentTo(expectedValue);
+        }
+
+    }
 }

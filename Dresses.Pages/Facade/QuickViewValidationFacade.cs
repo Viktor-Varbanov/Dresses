@@ -5,8 +5,8 @@
 
     public class QuickViewValidationFacade
     {
-
         private QuickViewPage _quickViewPage => new QuickViewPage();
+
         public void ValidateCorrectProductIsSelected(Product product)
         {
             _quickViewPage.Validate.CorrectProductIsDisplayed(product);

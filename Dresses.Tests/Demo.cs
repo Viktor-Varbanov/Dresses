@@ -1,8 +1,7 @@
 ﻿namespace Dresses.Tests
 {
-    using Pages.Main;
-    using NUnit.Framework;
     using Models;
+    using NUnit.Framework;
     using Pages.Facade;
     using Pages.PurchaseSummary;
     using Pages.QuickView;
@@ -18,8 +17,6 @@
             Driver.StartBrowser();
 
             _database = new Database();
-
-
         }
 
         [Test]
@@ -31,6 +28,7 @@
             //var quickViewVerificationFacade = new QuickViewVerificationFacade(product);
             //quickViewVerificationFacade.VerifyCorrectItemIsSelected();
         }
+
         [Test]
         public void ClickProductQuickViewVerifyTheInformationAndAddToCart()
         {
@@ -47,7 +45,6 @@
             //quickViewVerificationFacade.ChangeProductInformation();
             //quickViewVerificationFacade.VerifyCorrectItemIsSelected();
         }
-
 
         [Test]
         public void NavigateToProduct_ClickQuickView_AndValidateInformationThere()
@@ -69,11 +66,6 @@
         public void NavigateToProduct_ClickQuickView_ChangeInformation_AddToCard_ValidateCorrectProductIsAdded()
         {
             var product = _database.GetProductByName("Printed Chiffon Dress");
-            //var product = _database.GetProductByName("Printed Chiffon Dress");
-            //product.VerifyBaseImageUrl = "http://automationpractice.com/img/p/2/2/22";
-            //product.Color = "Green";
-            //product.Size = "L";
-            //product.Quantity = 2;
             var quickViewPage = new QuickViewPage();
             var mainPageNavigationToProductFacade =
                 new MainPageNavigationToProductQuickViewFacade(product.Name, product.BaseImageUrl);
@@ -86,20 +78,20 @@
             productNewValues.Color = "Green";
             productNewValues.Size = "L";
             productNewValues.Quantity = 2;
-            quickViewPage.ChangeSize("L");
-            quickViewPage.ChangeQuantity("2");
-            quickViewPage.ChangeColor("Green");
-            quickViewPage.Validate.CorrectChangesAreMade(productNewValues);
+            var quickViewValidationFacade = new QuickViewValidationFacade();
+            quickViewValidationFacade.ChangeProductAttributes("Green", "L", "2");
+            //quickViewPage.ChangeSize("L");
+            //quickViewPage.ChangeQuantity("2");
+            //quickViewPage.ChangeColor("Green");
+            //Applies discount to product two times
+            quickViewValidationFacade.ValidateCorrectProductIsSelected(productNewValues);
+            //   quickViewPage.Validate.CorrectChangesAreMade(productNewValues);
             quickViewPage.AddToCart(productNewValues);
-            PurchaseSummaryPage purchaseSummaryPage = new PurchaseSummaryPage();
+            var purchaseSummaryPage = new PurchaseSummaryPage();
             purchaseSummaryPage.Validate.ItemSuccessfullyAddedToCart();
             purchaseSummaryPage.Validate.CorrectProductIsAddedToCart(productNewValues);
             purchaseSummaryPage.ProceedToCheckout();
-
-
-
         }
-
 
         [TearDown]
         public void TearDown()

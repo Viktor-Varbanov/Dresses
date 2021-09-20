@@ -1,7 +1,6 @@
 ﻿namespace Dresses.Pages.Facade
 {
     using Main;
-    using Models;
 
     public class MainPageNavigationToProductQuickViewFacade
     {
@@ -20,7 +19,6 @@
         {
             _mainPage.NavigateToPage();
             _mainPage.ScrollDownToDress(_productName, _productImageUrl);
-            //  _mainPage.HoverDress(_productName, _productImageUrl);
             _mainPage.ClickQuickViewButton(_productName, _productImageUrl);
         }
     }

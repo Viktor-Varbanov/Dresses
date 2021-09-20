@@ -1,6 +1,5 @@
 ﻿namespace Dresses.Common
 {
-
     using System.Text.RegularExpressions;
 
     public static class DataManipulation
@@ -26,6 +25,5 @@
             var x = Regex.Match(url, BaseImageUrlRegexPattern);
             return x.ToString();
         }
-
     }
 }
