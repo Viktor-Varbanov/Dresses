@@ -65,7 +65,6 @@
             actualValue.ShouldBeEquivalentTo(expectedValue);
         }
 
-
         [Test]
         public void TestingRegexForColorAndSize()
         {

@@ -32,6 +32,7 @@ namespace Dresses.Models
             });
             products.Add(new Product()
             {
+                //different size different id
                 Id = "product_2_8_0_0",
                 Name = "Blouse",
                 Model = "demo_2",
@@ -39,7 +40,7 @@ namespace Dresses.Models
                 Price = 27.00m,
                 BaseImageUrl = "http://automationpractice.com/img/p/5/5",
                 Color = "White",
-                Size = "S",
+                Size = "M",
                 Availability = "In stock",
                 HasDiscount = false,
                 PercentageDiscount = 0,

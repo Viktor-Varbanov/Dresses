@@ -2,6 +2,7 @@
 {
     using Models;
     using NUnit.Framework;
+    using Pages.Cart;
     using Pages.Main;
     using Pages.PurchaseSummary;
     using Pages.QuickView;
@@ -13,6 +14,7 @@
         private MainPage _mainPage;
         private QuickViewPage _quickViewPage;
         private PurchaseSummaryPage _purchaseSummaryPage;
+        private CartPage _cartPage;
 
         [SetUp]
         public void SetUp()
@@ -22,6 +24,7 @@
             _database = new Database();
             _quickViewPage = new QuickViewPage();
             _purchaseSummaryPage = new PurchaseSummaryPage();
+            _cartPage = new CartPage();
         }
 
         [Test]
@@ -35,7 +38,6 @@
 
             // --Act
             _mainPage.ClickQuickViewButton();
-
 
             // --Assert
             _quickViewPage.Validate.CorrectProductNameIsDisplayed(product.Name);
@@ -55,14 +57,12 @@
         [TestCase("M", "20")]
         public void CorrectProductIsAddedToCart(string desiredSize, string desiredQuantity)
         {
-            // 1. Get BlackBlouse from database
-            // 2. Take Whiteblouse from database and modify the quantity size and color
-
             // --Arrange
             Product blackBlouse = _database.GetProductById("product_2_7_0_0");
             Product whiteBlouse = _database.GetProductById("product_2_8_0_0");
             whiteBlouse.Size = desiredSize;
             whiteBlouse.Quantity = int.Parse(desiredQuantity);
+            whiteBlouse.Id = "product_2_10_0_0";
             Cart.AddProductToCart(whiteBlouse);
             _mainPage.NavigateToPage();
             _mainPage.ScrollDownToDress("Blouse", "http://automationpractice.com/img/p/7/7");
@@ -94,76 +94,18 @@
             _purchaseSummaryPage.Validate.CorrectProductQuantityIsDisplayed(whiteBlouse.Quantity);
             _purchaseSummaryPage.Validate.CorrectProductPriceIsDisplayed(whiteBlouse.Price);
             _purchaseSummaryPage.Validate.CorrectProductTotalPriceIsDisplayed(Cart.GetProductTotalPriceById(whiteBlouse.Id));
+            _purchaseSummaryPage.ProceedToCheckout();
 
-        }
-
-        [Test]
-        public void NavigateToProduct_ClickQuickView_AndValidateInformationThere()
-        {
-            //// --Arrange
-            //var product = _database.GetProductByName("Blouse");
-            //var mainPageNavigationToProductFacade =
-            //    new MainPageNavigationToProductQuickViewFacade(product.Name, product.BaseImageUrl);
-            //var quickViewValidationFacade = new QuickViewValidationFacade();
-
-            //// --Act
-            //mainPageNavigationToProductFacade.GoToProduct();
-
-            //// --Assert
-            //quickViewValidationFacade.ValidateCorrectProductIsSelected(product);
-        }
-
-        [Test]
-        public void NavigateToProduct_ClickQuickView_ChangeInformation_AddToCard_ValidateCorrectProductIsAdded()
-        {
-            //var product = _database.GetProductByName("Printed Chiffon Dress");
-            //var quickViewPage = new QuickViewPage();
-            //var mainPageNavigationToProductFacade =
-            //    new MainPageNavigationToProductQuickViewFacade(product.Name, product.BaseImageUrl);
-
-            //// --Act
-            //mainPageNavigationToProductFacade.GoToProduct();
-            //quickViewPage.Validate.CorrectProductIsDisplayed(product);
-            //var productNewValues = product;
-            //productNewValues.BaseImageUrl = "http://automationpractice.com/img/p/2/2/22";
-            //productNewValues.Color = "Green";
-            //productNewValues.Size = "L";
-            //productNewValues.Quantity = 2;
-            //var quickViewValidationFacade = new QuickViewValidationFacade();
-            //quickViewValidationFacade.ChangeProductAttributes("Green", "L", "2");
-            ////quickViewPage.ChangeSize("L");
-            ////quickViewPage.ChangeQuantity("2");
-            ////quickViewPage.ChangeColor("Green");
-            ////Applies discount to product two times
-            //quickViewValidationFacade.ValidateCorrectProductIsSelected(productNewValues);
-            ////   quickViewPage.Validate.CorrectChangesAreMade(productNewValues);
-            //quickViewPage.AddToCart(productNewValues);
-            //var purchaseSummaryPage = new PurchaseSummaryPage();
-            //purchaseSummaryPage.Validate.ItemSuccessfullyAddedToCart();
-            //purchaseSummaryPage.Validate.CorrectProductIsAddedToCart(productNewValues);
-            //purchaseSummaryPage.ProceedToCheckout();
-        }
-
-
-        [Test]
-        public void NavigateToProduct_ClickQuickView_AddToCart_VerifyCorrectProductIsAddToCart()
-        {
-            //var product = _database.GetProductByName("Blouse");
-            //var quickViewPage = new QuickViewPage();
-            //var mainPageNavigationToProductFacade =
-            //    new MainPageNavigationToProductQuickViewFacade(product.Name, product.BaseImageUrl);
-            //var quickViewValidationFacade = new QuickViewValidationFacade();
-            //var cartPage = new CartPage();
-            //// --Act
-            //mainPageNavigationToProductFacade.GoToProduct();
-            //quickViewValidationFacade.ValidateCorrectProductIsSelected(product);
-            //quickViewPage.AddToCart(product);
-            //var purchaseSummaryPage = new PurchaseSummaryPage();
-            //purchaseSummaryPage.Validate.ItemSuccessfullyAddedToCart();
-            //purchaseSummaryPage.Validate.CorrectProductIsAddedToCart(product);
-            //purchaseSummaryPage.ProceedToCheckout();
-            //cartPage.Validate.VerifyInformation(product);
-
+            _cartPage.WaitForPageToLoad();
+            _cartPage.Validate.CorrectProductImageUrlIsDisplayed(whiteBlouse.BaseImageUrl);
+            _cartPage.Validate.CorrectProductNameIsDisplayed(whiteBlouse.Name);
+            _cartPage.Validate.CorrectProductModelIsDisplayed(whiteBlouse.Model);
+            _cartPage.Validate.CorrectProductColorIsDisplayed(whiteBlouse.Color);
+            _cartPage.Validate.CorrectProductSizeIsDisplayed(whiteBlouse.Size);
+            _cartPage.Validate.CorrectProductAvailabilityIsDisplayed(whiteBlouse.Availability);
+            _cartPage.Validate.CorrectProductPriceIsDisplayed(whiteBlouse.Price);
+            _cartPage.Validate.CorrectProductQuantityIsDisplayed(whiteBlouse.Quantity);
+            _cartPage.Validate.CorrectProductTotalPriceDisplayed(Cart.GetProductTotalPriceById(whiteBlouse.Id));
         }
 
         [TearDown]

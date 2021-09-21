@@ -11,6 +11,7 @@
         private string _productName;
         private string _productImageUrl;
         private Actions _actions = new Actions(Browser);
+
         public void NavigateToPage()
         {
             Browser.Navigate().GoToUrl("http://automationpractice.com/index.php");

@@ -1,13 +1,14 @@
 ﻿namespace Dresses.Pages.PurchaseSummary
 {
-    using System.Linq;
     using Common;
     using FluentAssertions;
+    using System.Linq;
 
     public class PurchaseSummaryValidator : ProductValidator<PurchaseSummaryElementMap>
     {
         // [0] for color, [1] for size
         private string[] _productAttributes => Map.ProductColorAndSize.Text.Split(", ").ToArray();
+
         public void ItemSuccessfullyAddedToCart()
         {
             string headingText = Map.SuccessfulMessage.Text;
@@ -58,6 +59,5 @@
             decimal displayedProductTotalPrice = DataManipulation.ConvertPriceToDecimal(Map.Total.Text);
             displayedProductTotalPrice.Should().BeApproximately(expectedProductTotalPrice, 2);
         }
-
     }
 }

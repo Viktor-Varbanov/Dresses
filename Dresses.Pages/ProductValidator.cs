@@ -1,10 +1,6 @@
 ﻿namespace Dresses.Pages
 {
-    using FluentAssertions;
     using AbstractionPageComponents;
-    using Common;
-    using NUnit.Framework;
-
 
     public abstract class ProductValidator<TMap> : AbstractValidator<TMap>
         where TMap : AbstractElementMap, new()
@@ -19,6 +15,5 @@
         public abstract void CorrectProductPriceIsDisplayed(decimal expectedProductPrice);
 
         public abstract void CorrectProductSizeIsDisplayed(string expectedProductSize);
-
     }
 }

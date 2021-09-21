@@ -1,15 +1,8 @@
 ﻿namespace Dresses.Tests.TestingClasses
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
-    using System.Threading.Tasks;
-    using Common;
     using FluentAssertions;
     using Models;
     using NUnit.Framework;
-    using Shouldly;
 
     [TestFixture]
     public class ProductShould
@@ -35,9 +28,6 @@
             decimal newPrice = product.Price;
             decimal expectedPrice = 80.00m;
             newPrice.Should().BeApproximately(expectedPrice, 2);
-
-
-
         }
     }
 }

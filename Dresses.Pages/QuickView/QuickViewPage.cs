@@ -1,7 +1,6 @@
 ﻿namespace Dresses.Pages.QuickView
 {
     using AbstractionPageComponents;
-    using Models;
     using OpenQA.Selenium;
     using OpenQA.Selenium.Support.UI;
     using SeleniumExtras.WaitHelpers;

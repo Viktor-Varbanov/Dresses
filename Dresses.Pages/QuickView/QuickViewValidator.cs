@@ -3,10 +3,8 @@
     using Common;
     using FluentAssertions;
 
-
     public class QuickViewValidator : ProductValidator<QuickViewPageElementMap>
     {
-
         public override void CorrectProductNameIsDisplayed(string expectedProductName)
         {
             string displayedProductName = Map.Name.Text;
@@ -57,6 +55,5 @@
             double actualDiscount = (double)DataManipulation.ConvertPriceToDecimal(displayedProductDiscount);
             expectedDiscount.Should().BeApproximately(actualDiscount, 2);
         }
-
     }
 }

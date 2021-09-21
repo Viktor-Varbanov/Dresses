@@ -42,5 +42,16 @@
 
             return targetProduct.Quantity * targetProduct.Price;
         }
+
+        public static string GetFirstProductId()
+        {
+            Product product = _products.FirstOrDefault();
+            if (product == null)
+            {
+                throw new ArgumentOutOfRangeException("Your cart is empty");
+            }
+
+            return product.Id;
+        }
     }
 }

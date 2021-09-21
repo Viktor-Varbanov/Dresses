@@ -44,6 +44,5 @@
         public string Availability { get; set; }
 
         private decimal ApplyDiscount(double percentage) => Math.Round(_price - _price * (decimal)(percentage / 100), 2);
-
     }
 }
