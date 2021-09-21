@@ -4,7 +4,7 @@
 
     public static class DataManipulation
     {
-        private const string DiscountRegexPattern = "[0-9]{1,2}(.[0-9]{1,2})?";
+        private const string DiscountRegexPattern = "\\d+(.[0-9]{1,2})?";
 
         private const string BaseImageUrlRegexPattern = "[^-]*";
 

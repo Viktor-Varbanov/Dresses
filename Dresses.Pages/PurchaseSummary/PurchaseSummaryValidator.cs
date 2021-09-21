@@ -8,34 +8,12 @@
     {
         // [0] for color, [1] for size
         private string[] _productAttributes => Map.ProductColorAndSize.Text.Split(", ").ToArray();
-        //public void ItemSuccessfullyAddedToCart()
-        //{
-        //    var headingText = Map.SuccessfulMessage.Text;
-        //    Assert.AreEqual("Product successfully added to your shopping cart", headingText);
-        //}
+        public void ItemSuccessfullyAddedToCart()
+        {
+            string headingText = Map.SuccessfulMessage.Text;
+            headingText.Should().BeEquivalentTo("Product successfully added to your shopping cart");
+        }
 
-        //public void CorrectProductIsAddedToCart(Product product)
-        //{
-        //    VerifyProductName(product.Name, Map.Name.Text);
-        //    VerifyBaseImageUrl(product.BaseImageUrl, DataManipulation.ExtractBaseProductUrl(Map.ProductImageUrl(product.BaseImageUrl).GetAttribute("src")));
-        //    VerifyProductQuantity(product.Quantity, int.Parse(Map.QuantityInputField.Text));
-        //    VerifyProductTotalPrice(product.Quantity * product.Price, DataManipulation.ConvertPriceToDecimal(Map.Total.Text));
-        //    VerifyProductColor(product.Color, SplitAttributes[0]);
-        //    VerifyProductSize(product.Size, SplitAttributes[1]);
-        //}
-
-        //public void VerifyProductQuantity(int expectedProductQuantity, int actualProductQuantity)
-        //{
-        //    Assert.AreEqual(expectedProductQuantity, actualProductQuantity, FailTestMessage.ActualDifferentFromExpected(expectedProductQuantity, actualProductQuantity));
-        //}
-
-        //public void VerifyProductTotalPrice(decimal expectedTotalPrice, decimal actualTotalPrice)
-        //{
-        //    Assert.AreEqual(expectedTotalPrice, actualTotalPrice, FailTestMessage.ActualDifferentFromExpected(expectedTotalPrice, actualTotalPrice));
-        //}
-
-        ////0 for color, 1 for size
-        //private string[] SplitAttributes => Map.ProductColorAndSize.Text.Split(", ").ToArray();
         public override void CorrectProductNameIsDisplayed(string expectedProductName)
         {
             string displayedProductName = Map.ProductName.Text;
@@ -57,17 +35,29 @@
 
         public override void CorrectProductPriceIsDisplayed(decimal expectedProductPrice)
         {
-            throw new System.NotImplementedException();
+            decimal displayedProductTotalPrice = DataManipulation.ConvertPriceToDecimal(Map.Total.Text);
+            int displayedProductQuantity = int.Parse(Map.ProductQuantity.Text);
+            decimal priceOfTheProduct = displayedProductTotalPrice / displayedProductQuantity;
+            priceOfTheProduct.Should().BeApproximately(expectedProductPrice, 2);
         }
 
         public override void CorrectProductSizeIsDisplayed(string expectedProductSize)
         {
-            throw new System.NotImplementedException();
+            string displayedProductSize = _productAttributes[1];
+            displayedProductSize.Should().BeEquivalentTo(expectedProductSize);
         }
 
-        public void CorrectProductQuantityIsDisplayed(int productQuantity)
+        public void CorrectProductQuantityIsDisplayed(int expectedProductQuantity)
         {
-
+            int displayedProductQuantity = int.Parse(Map.ProductQuantity.Text);
+            displayedProductQuantity.Should().Be(expectedProductQuantity);
         }
+
+        public void CorrectProductTotalPriceIsDisplayed(decimal expectedProductTotalPrice)
+        {
+            decimal displayedProductTotalPrice = DataManipulation.ConvertPriceToDecimal(Map.Total.Text);
+            displayedProductTotalPrice.Should().BeApproximately(expectedProductTotalPrice, 2);
+        }
+
     }
 }

@@ -20,7 +20,7 @@
         {
             // --Arrange
             var expectedSum = 29.00m;
-            var product = _database.GetProductByName("Blouse");
+            var product = _database.GetProductById("product_2_7_0_0");
 
             // --Act
             Cart.AddProductToCart(product);
@@ -35,8 +35,7 @@
         {
             // --Arrange
             var expectedSum = 56.00m;
-            var product = _database.GetProductByName("Blouse");
-
+            var product = _database.GetProductById("product_2_7_0_0");
             // --Act
             Cart.AddProductToCart(product);
             Cart.AddProductToCart(product);

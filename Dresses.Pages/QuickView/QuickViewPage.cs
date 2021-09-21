@@ -10,11 +10,10 @@
 
     public class QuickViewPage : AbstractPageWithValidator<QuickViewPageElementMap, QuickViewValidator>
     {
-        public void AddToCart(Product product)
+        public void AddToCart()
         {
-            Cart.AddProductToCart(product);
             Map.AddToCartButton.Click();
-            SwitchToCart();
+            SwitchToSummary();
         }
 
         public void ChangeColor(string name)
@@ -36,7 +35,7 @@
             Map.QuantityInputField.SendKeys(quantity);
         }
 
-        private void SwitchToCart()
+        private void SwitchToSummary()
         {
             WebDriverWait wait = new WebDriverWait(Driver.Browser, TimeSpan.FromSeconds(20));
             wait.Until(ExpectedConditions.ElementIsVisible(By.Id("layer_cart")));
