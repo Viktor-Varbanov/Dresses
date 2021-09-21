@@ -97,6 +97,7 @@
             _purchaseSummaryPage.ProceedToCheckout();
 
             _cartPage.WaitForPageToLoad();
+            _cartPage.Validate.CartPageIsNavigated();
             _cartPage.Validate.CorrectProductImageUrlIsDisplayed(whiteBlouse.BaseImageUrl);
             _cartPage.Validate.CorrectProductNameIsDisplayed(whiteBlouse.Name);
             _cartPage.Validate.CorrectProductModelIsDisplayed(whiteBlouse.Model);
@@ -106,6 +107,9 @@
             _cartPage.Validate.CorrectProductPriceIsDisplayed(whiteBlouse.Price);
             _cartPage.Validate.CorrectProductQuantityIsDisplayed(whiteBlouse.Quantity);
             _cartPage.Validate.CorrectProductTotalPriceDisplayed(Cart.GetProductTotalPriceById(whiteBlouse.Id));
+            _cartPage.Validate.CorrectProductTotalPriceDisplayed(Cart.CalculateSum());
+            _cartPage.Validate.CorrectShippingCostIsDisplayed(Cart.ShippingCost);
+            _cartPage.Validate.CorrectCartTotalPriceIsDisplayed(Cart.CalculateSum());
         }
 
         [TearDown]

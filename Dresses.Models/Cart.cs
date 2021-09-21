@@ -7,7 +7,7 @@
     public static class Cart
     {
         private static List<Product> _products = new List<Product>();
-        private const decimal ShippingCost = 2.00m;
+        public const decimal ShippingCost = 2.00m;
 
         public static void AddProductToCart(Product product)
         {

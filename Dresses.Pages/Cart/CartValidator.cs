@@ -11,38 +11,16 @@
 
         private string _productAttributes => Map.ProductAttributes(_productId).GetAttribute("href");
 
-        private string _productModel => Map.ProductModel(_productId).Text;
-        //public void Navigated()
-        //{
-        //    Assert.AreEqual("Order - My Store", driver.Browser.Title);
-        //}
 
-        //public void VerifyInformation(Product product)
-        //{
-        //    VerifyProductName(product.Name, Map.Name(product.Id).Text);
-        //    VerifyBaseImageUrl(product.BaseImageUrl, DataManipulation.ExtractBaseProductUrl(Map.ProductImageUrl(product.Id).GetAttribute("src")));
-        //    VerifyProductPrice(product.Price, Map.Price(product.Id).Text);
-        //    VerifyProductQuantity(product.Quantity, GetProductQuantity(product.Id));
-        //    VerifyProductTotalPrice(Cart.GetProductTotalPriceById(product.Id), DataManipulation.ConvertPriceToDecimal(Map.TotalPriceForProduct(product.Id).Text));
-        //    VerifyProductAvailability(product.Availability, Map.ProductAvailability(product.Id).Text);
-        //}
+        public void CartPageIsNavigated()
+        {
+            string expectedTitle = "Order - My Store";
+            string actualTitle = Driver.Browser.Title;
 
-        //private int GetProductQuantity(string id) => int.Parse(Map.QuantityInputField(id).GetAttribute("value"));
+            actualTitle.Should().BeEquivalentTo(expectedTitle);
+        }
 
-        //public void VerifyProductQuantity(int expected, int actual)
-        //{
-        //    Assert.AreEqual(expected, actual, FailTestMessage.ActualDifferentFromExpected(expected, actual));
-        //}
 
-        //public void VerifyProductTotalPrice(decimal expectedPrice, decimal actualPrice)
-        //{
-        //    Assert.AreEqual(expectedPrice, actualPrice, FailTestMessage.ActualDifferentFromExpected(expectedPrice, actualPrice));
-        //}
-
-        //public void VerifyProductAvailability(string expectedAvailability, string actualAvailability)
-        //{
-        //    Assert.AreEqual(expectedAvailability, actualAvailability, FailTestMessage.ActualDifferentFromExpected(expectedAvailability, actualAvailability));
-        //}
         public override void CorrectProductNameIsDisplayed(string expectedProductName)
         {
             IWebElement productName = Map.ProductName(_productId);
@@ -100,10 +78,32 @@
 
         public void CorrectProductModelIsDisplayed(string expectedProductModel)
         {
-            int length = _productModel.Length;
-            int startIndex = _productModel.IndexOf('d');
-            string model = _productModel.Remove(0, startIndex);
+            string rawProductModel = Map.ProductModel(_productId).Text;
+            int startIndexOfModel = rawProductModel.IndexOf('d');
+            string model = rawProductModel.Remove(0, startIndexOfModel);
             model.Should().BeEquivalentTo(expectedProductModel);
+        }
+
+        public void CorrectCartTotalPriceIsDisplayed(decimal expectedTotalProductPrice)
+        {
+            string displayedTotalProductPrice = Map.TotalProductsPrice.Text;
+            decimal totalPrice = DataManipulation.ConvertPriceToDecimal(displayedTotalProductPrice);
+
+            totalPrice.Should().BeApproximately(expectedTotalProductPrice - 2, 2);
+        }
+
+        public void CorrectShippingCostIsDisplayed(decimal expectedShippingPrice)
+        {
+            string displayedProductShipping = Map.TotalShipping.Text;
+            decimal shippingPrice = DataManipulation.ConvertPriceToDecimal(displayedProductShipping);
+            shippingPrice.Should().BeApproximately(expectedShippingPrice, 2);
+        }
+
+        public void CorrectFinalPriceIsDisplayed(decimal expectedFinalPrice)
+        {
+            string displayedFinalPrice = Map.TotalProductsPriceWithShipping.Text;
+            decimal finalPrice = DataManipulation.ConvertPriceToDecimal(displayedFinalPrice);
+            finalPrice.Should().BeApproximately(expectedFinalPrice, 2);
         }
     }
 }

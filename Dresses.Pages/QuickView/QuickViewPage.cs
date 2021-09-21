@@ -36,8 +36,8 @@
 
         private void SwitchToSummary()
         {
-            WebDriverWait wait = new WebDriverWait(Driver.Browser, TimeSpan.FromSeconds(20));
-            wait.Until(ExpectedConditions.ElementIsVisible(By.Id("layer_cart")));
+
+            Driver.BrowserWait.Until(ExpectedConditions.ElementIsVisible(By.Id("layer_cart")));
         }
     }
 }
