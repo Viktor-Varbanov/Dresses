@@ -16,6 +16,5 @@ namespace DressWebsiteTests.Pages.Main
 
         public IWebElement QuickViewIframeWindow => Driver.FindElement(By.XPath("//iframe[@class='fancybox-iframe']"));
 
-
     }
 }

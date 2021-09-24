@@ -25,7 +25,7 @@ namespace DressWebsiteTests.Pages.Main
             Actions.HoverElement(desiredProduct);
             IWebElement desiredProductQuickView = DesiredProductQuickView(desiredProductName);
             desiredProductQuickView.Click();
-            Driver.SwitchToIFrame(WebDriverWait, "//iframe[@class='fancybox-iframe']", QuickViewIframeWindow);
+            Driver.SwitchToIFrame(WebDriverWait, By.ClassName("fancybox-iframe"), QuickViewIframeWindow);
         }
 
         protected override void WaitForPageToLoad()

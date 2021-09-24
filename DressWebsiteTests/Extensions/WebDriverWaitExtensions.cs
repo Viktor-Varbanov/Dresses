@@ -12,9 +12,9 @@ namespace DressWebsiteTests.Extensions
             wait.Until(ExpectedConditions.ElementToBeClickable(element));
         }
 
-        public static void UntilElementIsVisible(this WebDriverWait wait, string locator)
+        public static void UntilElementIsVisible(this WebDriverWait wait, By by)
         {
-            wait.Until(ExpectedConditions.ElementIsVisible(By.XPath(locator)));
+            wait.Until(ExpectedConditions.ElementIsVisible(by));
         }
     }
 }

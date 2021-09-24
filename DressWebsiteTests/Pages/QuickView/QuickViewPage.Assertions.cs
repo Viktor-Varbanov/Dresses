@@ -8,7 +8,10 @@ namespace DressWebsiteTests.Pages.QuickView
         {
             Assert.AreEqual(expectedProductName, ProductName.Text);
         }
-
+        public void AssertCorrectProductImageIsDisplayed(string expectedProductImage)
+        {
+            ProductImage.GetAttribute("src").StartsWith(expectedProductImage);
+        }
         public void AssertCorrectProductModelIsDisplayed(string expectedProductModel)
         {
             ProductModel.Text.ShouldContain(expectedProductModel);

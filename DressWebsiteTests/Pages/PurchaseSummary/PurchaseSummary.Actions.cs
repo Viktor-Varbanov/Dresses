@@ -21,7 +21,7 @@ namespace DressWebsiteTests.Pages.PurchaseSummary
         protected override void WaitForPageToLoad()
         {
             Driver.SwitchTo().ParentFrame();
-            WebDriverWait.Until(ExpectedConditions.ElementIsVisible(By.CssSelector("div[class='layer_cart_product col-xs-12 col-md-6']")));
+            WebDriverWait.UntilElementIsVisible(By.CssSelector("div[class='layer_cart_product col-xs-12 col-md-6']"));
         }
     }
 }
