@@ -1,34 +1,35 @@
-﻿namespace DressWebsiteTests.Pages.QuickView
+﻿using OpenQA.Selenium;
+using DressWebsiteTests.Extensions;
+namespace DressWebsiteTests.Pages.QuickView
 {
-    using OpenQA.Selenium;
 
     public partial class QuickViewPage
     {
-        public IWebElement AddToCartButton => Driver.FindElement(By.Name("Submit"));
+        public IWebElement AddToCartButton => Driver.FindElementByName("Submit");
 
-        public IWebElement ProductImage => Driver.FindElement(By.Id("bigpic"));
+        public IWebElement ProductImage => Driver.FindElementById("bigpic");
 
-        public IWebElement ProductName => Driver.FindElement(By.XPath("//h1[@itemprop='name']"));
+        public IWebElement ProductName => Driver.FindElementByCssSelector("h1[itemprop]");
 
-        public IWebElement ProductModel => Driver.FindElement(By.Id("product_reference"));
+        public IWebElement ProductModel => Driver.FindElementById("product_reference");
 
-        public IWebElement ProductDescription => Driver.FindElement(By.Id("short_description_content"));
+        public IWebElement ProductDescription => Driver.FindElementById("short_description_content");
 
-        public IWebElement ProductSize => Driver.FindElement(By.CssSelector("div#uniform-group_1 > span"));
+        public IWebElement ProductSize => Driver.FindElementByCssSelector("div#uniform-group_1 > span");
 
-        public IWebElement SelectedColor => Driver.FindElement(By.CssSelector("li.selected > a"));
+        public IWebElement SelectedColor => Driver.FindElementByCssSelector("li.selected > a");
 
-        public IWebElement ProductPrice => Driver.FindElement(By.Id("our_price_display"));
+        public IWebElement ProductPrice => Driver.FindElementById("our_price_display");
 
-        public IWebElement SizeDropdown => Driver.FindElement(By.XPath("//select[@id='group_1']"));
+        public IWebElement SizeDropdown => Driver.FindElementById("group_1");
 
-        public IWebElement QuantityInputField => Driver.FindElement(By.XPath("//input[@id='quantity_wanted']"));
+        public IWebElement QuantityInputField => Driver.FindElementById("quantity_wanted']");
 
-        public IWebElement ProductDiscountPercentage => Driver.FindElement(By.Id("reduction_percent_display"));
+        public IWebElement ProductDiscountPercentage => Driver.FindElementById("reduction_percent_display");
 
         public IWebElement DesiredProductColor(string colorName)
         {
-            return Driver.FindElement(By.XPath($"//a[@name='{colorName}']"));
+            return Driver.FindElementByXpath($"//a[@name='{colorName}']");
         }
     }
 }
