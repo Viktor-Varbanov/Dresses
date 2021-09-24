@@ -2,6 +2,7 @@
 using OpenQA.Selenium.Interactions;
 using OpenQA.Selenium.Support.UI;
 using DressWebsiteTests.Extensions;
+using SeleniumExtras.WaitHelpers;
 
 namespace DressWebsiteTests.Pages.Main
 {
@@ -14,6 +15,7 @@ namespace DressWebsiteTests.Pages.Main
         public void GoTo()
         {
             Driver.Navigate().GoToUrl("http://automationpractice.com/index.php");
+            WaitForPageToLoad();
         }
 
         public void ChooseDress(string desiredProductName)
@@ -23,7 +25,12 @@ namespace DressWebsiteTests.Pages.Main
             Actions.HoverElement(desiredProduct);
             IWebElement desiredProductQuickView = DesiredProductQuickView(desiredProductName);
             desiredProductQuickView.Click();
-            Driver.SwitchToIFrame("//iframe[@class='fancybox-iframe']", QuickViewIframeWindow);
+            Driver.SwitchToIFrame(WebDriverWait, "//iframe[@class='fancybox-iframe']", QuickViewIframeWindow);
+        }
+
+        protected override void WaitForPageToLoad()
+        {
+            WebDriverWait.Until(ExpectedConditions.ElementIsVisible(By.Id("page")));
         }
 
     }

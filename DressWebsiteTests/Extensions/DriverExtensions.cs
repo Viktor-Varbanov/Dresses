@@ -11,11 +11,9 @@ namespace DressWebsiteTests.Extensions
             ((IJavaScriptExecutor)webDriver)
              .ExecuteScript("arguments[0].scrollIntoView(true);", webElement);
         }
-        public static void SwitchToIFrame(this IWebDriver webDriver, string iframe, IWebElement iframeElement)
+        public static void SwitchToIFrame(this IWebDriver webDriver, WebDriverWait wait, string iframe, IWebElement iframeElement)
         {
-            WebDriverWait wait = new WebDriverWait(webDriver, TimeSpan.FromSeconds(30));
-            wait.Until(ExpectedConditions.ElementIsVisible(By.XPath(iframe)));
-
+            wait.UntilElementIsVisible(iframe);
             webDriver.SwitchTo().Frame(iframeElement);
         }
     }

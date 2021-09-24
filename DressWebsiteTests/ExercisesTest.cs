@@ -1,4 +1,5 @@
 ﻿using DressWebsiteTests.Pages.Main;
+using DressWebsiteTests.Pages.PurchaseSummary;
 using DressWebsiteTests.Pages.QuickView;
 using NUnit.Framework;
 using OpenQA.Selenium;
@@ -16,6 +17,7 @@ namespace DressWebsiteTests
     {
         private readonly MainPage _mainPage;
         private readonly QuickViewPage _quickViewPage;
+        private readonly PurchaseSummary _purchaseSummary;
         private readonly IWebDriver _webDriver;
         private readonly Actions _actions;
         private readonly WebDriverWait _webDriverWait;
@@ -29,6 +31,7 @@ namespace DressWebsiteTests
             _webDriverWait = new WebDriverWait(_webDriver, TimeSpan.FromSeconds(30));
             _mainPage = new MainPage(_webDriver, _webDriverWait, _actions);
             _quickViewPage = new QuickViewPage(_webDriver, _webDriverWait, _actions);
+            _purchaseSummary = new PurchaseSummary(_webDriver, _webDriverWait, _actions);
         }
 
         public void Dispose()
@@ -42,7 +45,10 @@ namespace DressWebsiteTests
             _mainPage.GoTo();
             _mainPage.ChooseDress("Printed Chiffon Dress");
             _quickViewPage.AssertCorrectProductDiscountPercantageIsDisplayed(20);
-            _quickViewPage.AddToCartButton.Click();
+            _quickViewPage.AddToCart();
+            _purchaseSummary.ProceedToCHeckout();
+
+
         }
 
 

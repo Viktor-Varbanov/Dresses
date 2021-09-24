@@ -19,5 +19,7 @@ namespace DressWebsiteTests.Pages
 
         protected Actions Actions { get; set; }
 
+        protected virtual void WaitForPageToLoad() { }
+
     }
 }
