@@ -4,7 +4,6 @@ using SeleniumExtras.WaitHelpers;
 
 namespace DressWebsiteTests.Extensions
 {
-
     public static class WebDriverWaitExtensions
     {
         public static void UntilElementIsClickable(this WebDriverWait wait, IWebElement element)

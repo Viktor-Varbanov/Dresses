@@ -16,10 +16,4 @@
     <PackageReference Include="Shouldly" Version="4.0.3" />
   </ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\Dresses.Common\Dresses.Common.csproj" />
-    <ProjectReference Include="..\Dresses.Models\Dresses.Models.csproj" />
-    <ProjectReference Include="..\Dresses.Pages\Dresses.Pages.csproj" />
-  </ItemGroup>
-
 </Project>

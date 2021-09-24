@@ -12,9 +12,4 @@
     <PackageReference Include="Selenium.WebDriver" Version="4.0.0-rc1" />
   </ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\Dresses.Common\Dresses.Common.csproj" />
-    <ProjectReference Include="..\Dresses.Models\Dresses.Models.csproj" />
-  </ItemGroup>
-
 </Project>

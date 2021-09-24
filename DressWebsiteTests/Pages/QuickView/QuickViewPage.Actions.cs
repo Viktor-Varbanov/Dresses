@@ -5,19 +5,18 @@ using SeleniumExtras.WaitHelpers;
 
 namespace DressWebsiteTests.Pages.QuickView
 {
-
     public partial class QuickViewPage : WebPage
     {
-
         public QuickViewPage(IWebDriver driver, WebDriverWait webDriverWait, Actions actions) : base(driver, webDriverWait, actions)
         {
         }
+
         public void AddToCart()
         {
             AddToCartButton.Click();
             SwitchToSummary();
-
         }
+
         public void IncreaseProductQuantityTo(string desiredProductQuantity)
         {
             QuantityInputField.Clear();
@@ -35,12 +34,10 @@ namespace DressWebsiteTests.Pages.QuickView
             dropdown.SelectByText(desiredProductSize);
         }
 
-
         private void SwitchToSummary()
         {
             Driver.SwitchTo().ParentFrame();
             WebDriverWait.Until(ExpectedConditions.ElementIsVisible(By.CssSelector("div[class='layer_cart_product col-xs-12 col-md-6']")));
         }
-
     }
 }

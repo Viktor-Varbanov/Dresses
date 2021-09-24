@@ -2,9 +2,8 @@
 
 namespace DressWebsiteTests.Model
 {
-    public class ProductInformarion
+    public class ProductInformation
     {
-
         private decimal _price;
 
         public string Id { get; set; }
@@ -45,7 +44,5 @@ namespace DressWebsiteTests.Model
         public string Availability { get; set; }
 
         private decimal ApplyDiscount(double percentage) => Math.Round(_price - _price * (decimal)(percentage / 100), 2);
-
-
     }
 }

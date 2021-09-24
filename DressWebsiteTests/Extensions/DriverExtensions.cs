@@ -1,7 +1,6 @@
 ﻿using OpenQA.Selenium;
 using OpenQA.Selenium.Support.UI;
-using SeleniumExtras.WaitHelpers;
-using System;
+
 namespace DressWebsiteTests.Extensions
 {
     public static class DriverExtensions
@@ -11,6 +10,7 @@ namespace DressWebsiteTests.Extensions
             ((IJavaScriptExecutor)webDriver)
              .ExecuteScript("arguments[0].scrollIntoView(true);", webElement);
         }
+
         public static void SwitchToIFrame(this IWebDriver webDriver, WebDriverWait wait, By iframe, IWebElement iframeElement)
         {
             wait.UntilElementIsVisible(iframe);

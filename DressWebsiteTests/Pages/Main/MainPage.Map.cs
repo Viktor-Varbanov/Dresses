@@ -1,5 +1,6 @@
-﻿using OpenQA.Selenium;
-using DressWebsiteTests.Extensions;
+﻿using DressWebsiteTests.Extensions;
+using OpenQA.Selenium;
+
 namespace DressWebsiteTests.Pages.Main
 {
     public partial class MainPage
@@ -15,6 +16,5 @@ namespace DressWebsiteTests.Pages.Main
         }
 
         public IWebElement QuickViewIframeWindow => Driver.FindElementByClassName("fancybox-iframe");
-
     }
 }

@@ -1,5 +1,6 @@
 ﻿using NUnit.Framework;
 using Shouldly;
+
 namespace DressWebsiteTests.Pages.QuickView
 {
     public partial class QuickViewPage
@@ -8,10 +9,12 @@ namespace DressWebsiteTests.Pages.QuickView
         {
             Assert.AreEqual(expectedProductName, ProductName.Text);
         }
+
         public void AssertCorrectProductImageIsDisplayed(string expectedProductImage)
         {
             ProductImage.GetAttribute("src").StartsWith(expectedProductImage);
         }
+
         public void AssertCorrectProductModelIsDisplayed(string expectedProductModel)
         {
             ProductModel.Text.ShouldContain(expectedProductModel);
@@ -37,7 +40,7 @@ namespace DressWebsiteTests.Pages.QuickView
             SelectedColor.GetAttribute("name").ShouldBe(expectedProductColor);
         }
 
-        public void AssertCorrectProductDiscountPercantageIsDisplayed(int expectedProductDiscountPercantage)
+        public void AssertCorrectProductDiscountPercantageIsDisplayed(double expectedProductDiscountPercantage)
         {
             ProductDiscountPercentage.Text.Contains(expectedProductDiscountPercantage.ToString());
         }

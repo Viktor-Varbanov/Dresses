@@ -12,10 +12,10 @@ namespace DressWebsiteTests.Pages.PurchaseSummary
 
         public void AssertCorrectProductImageIsDisplayed(string expectedProductImageUrl)
         {
-            ProductImageUrl.GetAttribute("src").StartsWith(expectedProductImageUrl);
+            ProductImageUrl("").GetAttribute("src").StartsWith(expectedProductImageUrl);
         }
 
-        public void AssertCorrectProductNameIsDislpayed(string expectedProductName)
+        public void AssertCorrectProductNameIsDisplayed(string expectedProductName)
         {
             string productName = ProductName.Text;
             productName.ShouldBeEquivalentTo(expectedProductName);
@@ -54,6 +54,11 @@ namespace DressWebsiteTests.Pages.PurchaseSummary
         public void AssertTotalPrice(double expectedTotalCost)
         {
             TotalCost.Text.ShouldContain(expectedTotalCost.ToString());
+        }
+
+        public void AssertCorrectProductPriceIsDisplayed(decimal expectedProductPrice)
+        {
+            throw new System.NotImplementedException();
         }
     }
 }

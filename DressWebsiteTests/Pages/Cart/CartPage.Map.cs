@@ -1,22 +1,25 @@
-﻿using OpenQA.Selenium;
-using DressWebsiteTests.Extensions;
+﻿using DressWebsiteTests.Extensions;
+using OpenQA.Selenium;
 
 namespace DressWebsiteTests.Pages.Cart
 {
     public partial class CartPage
     {
-
         public IWebElement CartPageHeader => Driver.FindElementById("cart_title");
 
         public IWebElement ProductName(string productId)
         {
             return Driver.FindElement(By.XPath($"//tr[@id='{productId}']//p"));
-
         }
 
         public IWebElement ProductImageUrl(string productId)
         {
             return Driver.FindElementByXpath($"//tr[@id='{productId}']//child::td[@class='cart_product']//img");
+        }
+
+        public IWebElement ProductDiscount(string productId)
+        {
+            return Driver.FindElementByXpath($"//tr[@id='{productId}']//span[@class='price-percent-reduction small']");
         }
 
         public IWebElement ProductAttributes(string productId)
@@ -26,7 +29,6 @@ namespace DressWebsiteTests.Pages.Cart
 
         public IWebElement ProductPrice(string productId)
         {
-
             return Driver.FindElementByXpath($"//tr[@id='{productId}']//span[@class='price']");
         }
 

@@ -1,10 +1,10 @@
-﻿using OpenQA.Selenium;
-using DressWebsiteTests.Extensions;
+﻿using DressWebsiteTests.Extensions;
+using OpenQA.Selenium;
+
 namespace DressWebsiteTests.Pages.PurchaseSummary
 {
     public partial class PurchaseSummary
     {
-
         //Product Information
         public IWebElement ProductSectionHeaderText => Driver.FindElementByTagName("h2");
 

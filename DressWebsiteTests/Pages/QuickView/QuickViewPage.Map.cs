@@ -1,8 +1,8 @@
-﻿using OpenQA.Selenium;
-using DressWebsiteTests.Extensions;
+﻿using DressWebsiteTests.Extensions;
+using OpenQA.Selenium;
+
 namespace DressWebsiteTests.Pages.QuickView
 {
-
     public partial class QuickViewPage
     {
         public IWebElement AddToCartButton => Driver.FindElementByName("Submit");
@@ -23,7 +23,7 @@ namespace DressWebsiteTests.Pages.QuickView
 
         public IWebElement SizeDropdown => Driver.FindElementById("group_1");
 
-        public IWebElement QuantityInputField => Driver.FindElementById("quantity_wanted']");
+        public IWebElement QuantityInputField => Driver.FindElementById("quantity_wanted");
 
         public IWebElement ProductDiscountPercentage => Driver.FindElementById("reduction_percent_display");
 
