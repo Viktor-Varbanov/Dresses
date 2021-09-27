@@ -31,6 +31,6 @@ namespace DressWebsiteTests.Pages.PurchaseSummary
 
         public IWebElement TotalCost => Driver.FindElementByClassName("ajax_block_cart_total");
 
-        public IWebElement ProceedToCheckout => Driver.FindElementByCssSelector("a[title='Proceed to checkout']");
+        public IWebElement ProceedToCheckoutButton => Driver.FindElementByCssSelector("a[title='Proceed to checkout']");
     }
 }

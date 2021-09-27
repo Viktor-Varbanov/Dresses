@@ -1,7 +1,7 @@
 ﻿using OpenQA.Selenium;
 using OpenQA.Selenium.Interactions;
 using OpenQA.Selenium.Support.UI;
-using SeleniumExtras.WaitHelpers;
+using DressWebsiteTests.Extensions;
 
 namespace DressWebsiteTests.Pages.QuickView
 {
@@ -37,7 +37,7 @@ namespace DressWebsiteTests.Pages.QuickView
         private void SwitchToSummary()
         {
             Driver.SwitchTo().ParentFrame();
-            WebDriverWait.Until(ExpectedConditions.ElementIsVisible(By.CssSelector("div[class='layer_cart_product col-xs-12 col-md-6']")));
+            WebDriverWait.UntilElementIsVisible(By.CssSelector("div[class='layer_cart_product col-xs-12 col-md-6']"));
         }
     }
 }

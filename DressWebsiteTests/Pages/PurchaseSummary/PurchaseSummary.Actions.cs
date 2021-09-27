@@ -11,16 +11,15 @@ namespace DressWebsiteTests.Pages.PurchaseSummary
         {
         }
 
-        public void ProceedToCHeckout()
+        public void ProceedToCheckout()
         {
-            WaitForPageToLoad();
-            ProceedToCheckout.Click();
+            ProceedToCheckoutButton.Click();
         }
 
-        protected override void WaitForPageToLoad()
-        {
-            Driver.SwitchTo().ParentFrame();
-            WebDriverWait.UntilElementIsVisible(By.CssSelector("div[class='layer_cart_product col-xs-12 col-md-6']"));
-        }
+        //protected override void WaitForPageToLoad()
+        //{
+        //    Driver.SwitchTo().ParentFrame();
+        //    WebDriverWait.UntilElementIsVisible(By.CssSelector("div[class='layer_cart_product col-xs-12 col-md-6']"));
+        //}
     }
 }

@@ -2,7 +2,7 @@
 
 namespace DressWebsiteTests.Model
 {
-    public class ProductInformation
+    public class Product
     {
         private decimal _price;
 

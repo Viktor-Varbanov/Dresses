@@ -6,7 +6,7 @@ namespace DressWebsiteTests.Pages.Cart
     {
         public void AssertCartPageHeader()
         {
-            CartPageHeader.Text.ShouldBe("Shopping-cart summary");
+            CartPageHeader.Text.ShouldStartWith("Shopping-cart summary");
         }
 
         public void AssertCorrectProductColorIsDisplayed(string productId, string expectedProductColor)
@@ -21,12 +21,12 @@ namespace DressWebsiteTests.Pages.Cart
 
         public void AssertCorrectProductNameIsDisplayed(string productId, string expectedProductName)
         {
-            ProductName(productId).ShouldBeEquivalentTo(expectedProductName);
+            ProductName(productId).Text.ShouldBeEquivalentTo(expectedProductName);
         }
 
         public void AssertCorrectProductPriceIsDisplayed(string productId, decimal expectedProductPrice)
         {
-            ProductPrice(productId).Text.ShouldEndWith(expectedProductPrice.ToString());
+            ProductPrice(productId).Text.Remove(0, 1).ShouldStartWith(expectedProductPrice.ToString());
         }
 
         public void AssertCorrectProductSizeIsDisplayed(string productId, string expectedProductSize)
