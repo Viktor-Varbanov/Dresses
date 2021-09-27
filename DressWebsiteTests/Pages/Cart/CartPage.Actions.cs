@@ -10,7 +10,7 @@ namespace DressWebsiteTests.Pages.Cart
         public CartPage(IWebDriver driver, WebDriverWait webDriverWait, Actions actions) : base(driver, webDriverWait, actions)
         {
         }
-
+     
         public void WaitForPageToLoad()
         {
             Driver.SwitchTo().ParentFrame();

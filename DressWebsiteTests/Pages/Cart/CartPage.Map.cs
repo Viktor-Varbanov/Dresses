@@ -52,14 +52,17 @@ namespace DressWebsiteTests.Pages.Cart
             return Driver.FindElementByXpath($"//tr[@id='{productId}']//td[@class='cart_total']");
         }
 
+        public IWebElement ProductsQuantity => Driver.FindElementById("summary_products_quantity");
         public IWebElement TotalProductsCost => Driver.FindElementById("total_product");
 
         public IWebElement ShippingCost => Driver.FindElementById("total_shipping");
 
         public IWebElement TotalProductsPriceWithShipping => Driver.FindElementById("total_price_without_tax");
 
-        public IWebElement TaxesCosts => Driver.FindElementById("'total_tax");
+        public IWebElement TaxesCosts => Driver.FindElementById("total_tax");
 
         public IWebElement TotalProductsCostWithTaxes => Driver.FindElementById("total_price");
+
+        public IWebElement ProceedToCheckout => Driver.FindElementByCssSelector("a[class='button btn btn-default standard-checkout button-medium']");
     }
 }

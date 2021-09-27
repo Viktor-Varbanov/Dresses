@@ -46,19 +46,42 @@ namespace DressWebsiteTests.Pages.PurchaseSummary
             ProductsCost.Text.ShouldContain(expectedProductsCost.ToString());
         }
 
-        public void AssertShippingCost(double expectedShippingCost)
+        public void AssertShippingCost(decimal expectedShippingCost)
         {
+
             ShippingCost.Text.ShouldContain(expectedShippingCost.ToString());
         }
 
-        public void AssertTotalPrice(double expectedTotalCost)
+        public void AssertTotalPrice(decimal expectedTotalCost)
         {
             TotalCost.Text.ShouldContain(expectedTotalCost.ToString());
         }
 
-        public void AssertCorrectProductPriceIsDisplayed(decimal expectedProductPrice)
+        public void AssertProductCartText(int productCount)
         {
-            throw new System.NotImplementedException();
+            if (productCount == 1)
+            {
+                CartSectionHeaderTextWithOneProduct.Text.ShouldBe("There is 1 item in your cart.");
+            }
+            else
+            {
+                CartSectionHeaderWithMoreThanOneProduct.Text.Contains($"There are {productCount} items in your cart.");
+            }
+        }
+
+        public void AssertTotalProductsCost(decimal ProductCost)
+        {
+            ProductsCost.Text.ShouldContain(ProductCost.ToString());
+        }
+
+        public void AssertProductShippingCost(decimal shipping)
+        {
+            ShippingCost.Text.ShouldContain(shipping.ToString());
+        }
+
+        public void AssertTotalCost(int totalCost)
+        {
+            TotalCost.Text.ShouldContain(totalCost.ToString());
         }
     }
 }

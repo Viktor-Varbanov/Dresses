@@ -2,6 +2,7 @@
 using OpenQA.Selenium.Interactions;
 using OpenQA.Selenium.Support.UI;
 using DressWebsiteTests.Extensions;
+using SeleniumExtras.WaitHelpers;
 
 namespace DressWebsiteTests.Pages.QuickView
 {
@@ -26,6 +27,7 @@ namespace DressWebsiteTests.Pages.QuickView
         public void ChangeProductColorTo(string desiredProductColor)
         {
             DesiredProductColor(desiredProductColor).Click();
+            WebDriverWait.Until(ExpectedConditions.ElementExists(By.CssSelector("li.selected > a")));
         }
 
         public void ChangeProductSizeTo(string desiredProductSize)

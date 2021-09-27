@@ -15,14 +15,14 @@ namespace DressWebsiteTests.Facade
         private readonly IWebDriver _webDriver;
         private readonly WebDriverWait _webDriverWait;
         private readonly Actions _actions;
-        private readonly Product _product;
 
-        public PurchaseFacade(IWebDriver webDriver, WebDriverWait webDriverWait, Actions actions, Product product)
+
+        public PurchaseFacade(IWebDriver webDriver, WebDriverWait webDriverWait, Actions actions)
         {
             _webDriver = webDriver;
             _webDriverWait = webDriverWait;
             _actions = actions;
-            _product = product;
+
         }
 
         private MainPage _mainPage => new MainPage(_webDriver, _webDriverWait, _actions);
@@ -34,34 +34,34 @@ namespace DressWebsiteTests.Facade
         private CartPage _cartPage => new CartPage(_webDriver, _webDriverWait, _actions);
 
 
-        public void PurchaseProduct()
+        public void PurchaseProduct(Product product, Cart cart)
         {
-            NavigateToProduct();
-            ValidateProductInforationInQuickView();
+            NavigateToProduct(product.Name);
+            ValidateProductInforationInQuickView(product);
             _quickViewPage.AddToCart();
-            ValidateProductInformationInPurchaseSummary();
+            ValidateProductInformationInPurchaseSummary(product, cart);
             _purchaseSummary.ProceedToCheckout();
             _cartPage.WaitForPageToLoad();
-            ValidateCartInformation();
+            ValidateCartInformation(product, cart);
         }
 
-        public void PurchaseProduct(string color, string size, int quantity)
+        public void PurchaseProduct(Product product, Cart cart, string color, string size, int quantity)
         {
-            NavigateToProduct();
+            NavigateToProduct(product.Name);
             ChangeProductColorSizeAndQuantity(color, size, quantity);
-            ValidateProductInforationInQuickView();
+            ValidateProductInforationInQuickView(product);
             _quickViewPage.AddToCart();
-            ValidateProductInformationInPurchaseSummary();
+            ValidateProductInformationInPurchaseSummary(product, cart);
             _purchaseSummary.ProceedToCheckout();
             _cartPage.WaitForPageToLoad();
-            ValidateCartInformation();
+            ValidateCartInformation(product, cart);
         }
 
 
-        private void NavigateToProduct()
+        private void NavigateToProduct(string name)
         {
             _mainPage.GoTo();
-            _mainPage.ChooseDress(_product.Name);
+            _mainPage.ChooseDress(name);
         }
 
         private void ChangeProductColorSizeAndQuantity(string color, string size, int quantity)
@@ -70,48 +70,56 @@ namespace DressWebsiteTests.Facade
             _quickViewPage.ChangeProductSizeTo(size);
             _quickViewPage.IncreaseProductQuantityTo(quantity.ToString());
         }
-        private void ValidateProductInforationInQuickView()
+        private void ValidateProductInforationInQuickView(Product product)
         {
-            _quickViewPage.AssertCorrectProductImageIsDisplayed(_product.BaseImageUrl);
-            _quickViewPage.AssertCorrectProductNameIsDisplayed(_product.Name);
-            _quickViewPage.AssertCorrectProductModelIsDisplayed(_product.Model);
-            _quickViewPage.AssertCorrectProductDescriptionIsDisplayed(_product.Description);
-            _quickViewPage.AssertCorrectProductSizeIsDisplayed(_product.Size);
-            _quickViewPage.AssertCorrectProductColorIsDisplayed(_product.Color);
-            _quickViewPage.AssertCorrectProductPriceIsDisplayed(_product.Price);
-            if (_product.HasDiscount)
+            _quickViewPage.AssertCorrectProductImageIsDisplayed(product.BaseImageUrl);
+            _quickViewPage.AssertCorrectProductNameIsDisplayed(product.Name);
+            _quickViewPage.AssertCorrectProductModelIsDisplayed(product.Model);
+            _quickViewPage.AssertCorrectProductDescriptionIsDisplayed(product.Description);
+            _quickViewPage.AssertCorrectProductSizeIsDisplayed(product.Size);
+            _quickViewPage.AssertCorrectProductColorIsDisplayed(product.Color);
+            _quickViewPage.AssertCorrectProductPriceIsDisplayed(product.Price);
+            if (product.HasDiscount)
             {
-                _quickViewPage.AssertCorrectProductDiscountPercantageIsDisplayed(_product.PercentageDiscount);
+                _quickViewPage.AssertCorrectProductDiscountPercantageIsDisplayed(product.PercentageDiscount);
             }
         }
 
-        private void ValidateProductInformationInPurchaseSummary()
+        private void ValidateProductInformationInPurchaseSummary(Product product, Cart cart)
         {
             _purchaseSummary.AssertProductSectionHeaderTextIsCorrect();
-            _purchaseSummary.AssertCorrectProductImageIsDisplayed(_product.BaseImageUrl);
-            _purchaseSummary.AssertCorrectProductNameIsDisplayed(_product.Name);
-            _purchaseSummary.AssertCorrectProductColorIsDisplayed(_product.Color);
-            _purchaseSummary.AssertCorrectProductSizeIsDisplayed(_product.Size);
-            _purchaseSummary.AssertProductQuantityIsDisplayed(_product.Quantity);
-            _purchaseSummary.AssertCorrectProductTotalCostIsDisplayed((double)_product.Price * _product.Quantity);
+            _purchaseSummary.AssertCorrectProductImageIsDisplayed(product.BaseImageUrl);
+            _purchaseSummary.AssertCorrectProductNameIsDisplayed(product.Name);
+            _purchaseSummary.AssertCorrectProductColorIsDisplayed(product.Color);
+            _purchaseSummary.AssertCorrectProductSizeIsDisplayed(product.Size);
+            _purchaseSummary.AssertProductQuantityIsDisplayed(product.Quantity);
+            _purchaseSummary.AssertCorrectProductTotalCostIsDisplayed((double)product.Price * product.Quantity);
+            _purchaseSummary.AssertProductCartText(cart.GetProductsCount());
+            _purchaseSummary.AssertTotalProductsCost(cart.GetTotalPrice());
+            _purchaseSummary.AssertShippingCost(Cart.SHIPPING_PRICE);
+            _purchaseSummary.AssertTotalPrice(cart.GetTotalPrice() + Cart.SHIPPING_PRICE);
         }
 
-        private void ValidateCartInformation()
+        private void ValidateCartInformation(Product product, Cart cart)
         {
             _cartPage.AssertCartPageHeader();
-            _cartPage.AssertCorrectProductNameIsDisplayed(_product.Id, _product.Name);
-            _cartPage.AssertCorrectProductColorIsDisplayed(_product.Id, _product.Color);
-            _cartPage.AssertCorrectProductImageIsDisplayed(_product.Id, _product.BaseImageUrl);
-            _cartPage.AssertProductModel(_product.Id, _product.Model);
-            _cartPage.AssertCorrectProductSizeIsDisplayed(_product.Id, _product.Size);
-            _cartPage.AssertProductAvailability(_product.Id, _product.Availability);
-            _cartPage.AssertCorrectProductPriceIsDisplayed(_product.Id, _product.Price);
-            _cartPage.AssertProductQuantity(_product.Id, _product.Quantity);
-            _cartPage.AssertProductCost(_product.Id, _product.Price * _product.Quantity);
-            if (_product.HasDiscount)
+            _cartPage.AssertCorrectProductNameIsDisplayed(product.Id, product.Name);
+            _cartPage.AssertCorrectProductColorIsDisplayed(product.Id, product.Color);
+            _cartPage.AssertCorrectProductImageIsDisplayed(product.Id, product.BaseImageUrl);
+            _cartPage.AssertProductModel(product.Id, product.Model);
+            _cartPage.AssertCorrectProductSizeIsDisplayed(product.Id, product.Size);
+            _cartPage.AssertProductAvailability(product.Id, product.Availability);
+            _cartPage.AssertCorrectProductPriceIsDisplayed(product.Id, product.Price);
+            _cartPage.AssertProductQuantity(product.Id, product.Quantity);
+            _cartPage.AssertProductCost(product.Id, product.Price * product.Quantity);
+            if (product.HasDiscount)
             {
-                _cartPage.AssertCorrectProductDiscountIsDisplayed(_product.Id, _product.PercentageDiscount);
+                _cartPage.AssertCorrectProductDiscountIsDisplayed(product.Id, product.PercentageDiscount);
             }
+            _cartPage.AssertProductsQuantity(cart.GetProductsCount());
+            _cartPage.AssertTotalProductsCost(cart.GetTotalPrice());
+            _cartPage.AssertShippingCost(Cart.SHIPPING_PRICE);
+            _cartPage.AssertTotalCostIncludingTaxesAndProductCost(cart.GetTotalPrice() + Cart.SHIPPING_PRICE);
         }
     }
 }

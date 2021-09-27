@@ -58,5 +58,25 @@ namespace DressWebsiteTests.Pages.Cart
         {
             ProductQuantity(productId).GetAttribute("value").ShouldBe(expectedProductQuantity.ToString());
         }
+
+        public void AssertProductsQuantity(int expectedProductsQuantity)
+        {
+            ProductsQuantity.Text.ShouldContain(expectedProductsQuantity.ToString());
+        }
+
+        public void AssertTotalProductsCost(decimal expectedProductsCost)
+        {
+            TotalProductsCost.Text.ShouldContain(expectedProductsCost.ToString());
+        }
+
+        public void AssertShippingCost(decimal expectedShippingCost)
+        {
+            ShippingCost.Text.ShouldContain(expectedShippingCost.ToString());
+        }
+
+        public void AssertTotalCostIncludingTaxesAndProductCost(decimal expectedTotalCost)
+        {
+            TotalProductsCostWithTaxes.Text.ShouldContain(expectedTotalCost.ToString());
+        }
     }
 }
