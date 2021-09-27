@@ -1,7 +1,7 @@
-﻿using OpenQA.Selenium;
+﻿using DressWebsiteTests.Extensions;
+using OpenQA.Selenium;
 using OpenQA.Selenium.Interactions;
 using OpenQA.Selenium.Support.UI;
-using DressWebsiteTests.Extensions;
 using SeleniumExtras.WaitHelpers;
 
 namespace DressWebsiteTests.Pages.QuickView

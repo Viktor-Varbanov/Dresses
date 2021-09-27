@@ -48,7 +48,6 @@ namespace DressWebsiteTests.Pages.PurchaseSummary
 
         public void AssertShippingCost(decimal expectedShippingCost)
         {
-
             ShippingCost.Text.ShouldContain(expectedShippingCost.ToString());
         }
 

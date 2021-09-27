@@ -7,7 +7,6 @@ namespace DressWebsiteTests.Services
 {
     public class ProductService
     {
-
         private readonly ICollection<Product> _products;
 
         public ProductService()

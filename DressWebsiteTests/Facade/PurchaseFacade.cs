@@ -9,20 +9,17 @@ using OpenQA.Selenium.Support.UI;
 
 namespace DressWebsiteTests.Facade
 {
-
     public class PurchaseFacade
     {
         private readonly IWebDriver _webDriver;
         private readonly WebDriverWait _webDriverWait;
         private readonly Actions _actions;
 
-
         public PurchaseFacade(IWebDriver webDriver, WebDriverWait webDriverWait, Actions actions)
         {
             _webDriver = webDriver;
             _webDriverWait = webDriverWait;
             _actions = actions;
-
         }
 
         private MainPage _mainPage => new MainPage(_webDriver, _webDriverWait, _actions);
@@ -32,7 +29,6 @@ namespace DressWebsiteTests.Facade
         private PurchaseSummary _purchaseSummary => new PurchaseSummary(_webDriver, _webDriverWait, _actions);
 
         private CartPage _cartPage => new CartPage(_webDriver, _webDriverWait, _actions);
-
 
         public void PurchaseProduct(Product product, Cart cart)
         {
@@ -57,7 +53,6 @@ namespace DressWebsiteTests.Facade
             ValidateCartInformation(product, cart);
         }
 
-
         private void NavigateToProduct(string name)
         {
             _mainPage.GoTo();
@@ -70,6 +65,7 @@ namespace DressWebsiteTests.Facade
             _quickViewPage.ChangeProductSizeTo(size);
             _quickViewPage.IncreaseProductQuantityTo(quantity.ToString());
         }
+
         private void ValidateProductInforationInQuickView(Product product)
         {
             _quickViewPage.AssertCorrectProductImageIsDisplayed(product.BaseImageUrl);

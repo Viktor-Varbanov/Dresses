@@ -42,7 +42,7 @@ namespace DressWebsiteTests
         [Test]
         public void CorrectProductIsDisplayed_When_QuickViewIsClicked()
         {
-            // --Arrange
+            //Arrange
             var product = _productService.GetProductById("product_7_34_0_0");
             _cart.AddProduct(product);
 
@@ -53,7 +53,7 @@ namespace DressWebsiteTests
         [Test]
         public void CorrectProductIsAddedToCart()
         {
-            // --Arrange
+            //Arrange
             var product = _productService.GetProductById("product_7_38_0_0");
             _cart.AddProduct(product);
             var productColor = "Green";
